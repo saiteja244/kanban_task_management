@@ -32,3 +32,9 @@ body {
   height: 100vh;
   width: 100vw;
 }
+
+///////////// Utilities
+@import "./assets/css/utilities";
+
+///////////// Components
+@import "./components/Sidebar/sidebar";
