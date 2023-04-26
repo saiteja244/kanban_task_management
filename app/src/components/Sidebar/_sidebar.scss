@@ -1,4 +1,41 @@
-// Logo
+.sidebar {
+  position: absolute;
+  left: 0;
+  width: 300px;
+  background-color: $dark-3;
+  min-height: 100vh;
+  color: $grey;
+
+  h2 {
+    font-size: $font-header-sm;
+    font-weight: $font-weight-reg;
+    letter-spacing: 2.4px;
+    text-transform: uppercase;
+  }
+
+  ul {
+    font-size: $font-sm;
+
+    button {
+      border-radius: 20px;
+      padding: 5px 15px;
+    }
+
+    li {
+      &.active {
+        color: $white;
+        fill: $white;
+        background-color: $purple-dark;
+        width: 90%;
+        border-radius: 0 100px 100px 0;
+
+        & > button > svg > path {
+          fill: $white;
+        }
+      }
+    }
+  }
+}
 
 .logo.logo-dark > g > path {
   fill: $white;

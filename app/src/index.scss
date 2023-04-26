@@ -19,6 +19,15 @@ body {
   width: 100vw;
 }
 
+ul {
+  list-style-type: none;
+}
+
+button {
+  all: unset;
+  cursor: pointer;
+}
+
 *,
 ::before,
 ::after {
@@ -28,9 +37,14 @@ body {
 }
 
 .theme--dark {
-  background-color: $dark-3;
+  background-color: $dark-2;
   height: 100vh;
   width: 100vw;
+}
+
+.center-vertical {
+  display: flex;
+  align-items: center;
 }
 
 ///////////// Utilities
