@@ -6,6 +6,7 @@ const boards = [
     name: "Platform Launch",
     columns: [
       {
+        id: nanoid(),
         name: "Todo",
         tasks: [
           {

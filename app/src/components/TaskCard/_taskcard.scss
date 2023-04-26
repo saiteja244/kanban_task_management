@@ -1,0 +1,15 @@
+.task-card {
+  width: 280px;
+  background-color: $dark-3;
+
+  h4 {
+    font-size: $font-sm-2;
+    color: $white;
+  }
+
+  p {
+    color: $grey;
+    font-size: $font-sm;
+    line-height: $line-height-wide;
+  }
+}

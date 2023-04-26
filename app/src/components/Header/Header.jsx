@@ -1,9 +1,11 @@
 import React from "react";
 import { ReactComponent as Logo } from "../../assets/svgs/logo-dark.svg";
 import { UseAppStateContext } from "../../context/AppStateContext";
+import { UseBoardContext } from "../../context/BoardContext";
 
 const Header = () => {
   const [appState] = UseAppStateContext();
+  const { activeBoard } = UseBoardContext();
 
   return (
     <header className="header">
@@ -12,9 +14,13 @@ const Header = () => {
           appState.sideBarOpen ? "sidebar-open" : ""
         }`}
       >
-        <Logo className="logo" />
+        <h1>
+          <Logo className="logo" />
+        </h1>
       </div>
-      <div></div>
+      <div className="header__content">
+        <h2 className="ml-2">{activeBoard.name}</h2>
+      </div>
     </header>
   );
 };

@@ -1,6 +1,12 @@
 .header {
   background-color: $dark-3;
   height: 80px;
+  display: flex;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  z-index: 5;
 
   .logo-container {
     width: 300px;
@@ -10,5 +16,13 @@
 
   div:not(.logo-container) {
     border-bottom: 1px solid $stroke-dark-grey;
+  }
+
+  .header__content {
+    display: flex;
+    align-items: center;
+    color: $white;
+    font-weight: $font-weight-light;
+    width: calc(100% - 300px);
   }
 }

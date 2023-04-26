@@ -1,0 +1,13 @@
+.tasksboard__main {
+  transition: transform 1s cubic-bezier(0.01, 0.86, 0.165, 1);
+  transition-delay: 0.1s;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1rem;
+  padding: 1rem;
+  margin-top: 90px;
+}
+
+.translate-sidebar {
+  transform: translateX(300px);
+}
