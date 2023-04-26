@@ -1,15 +1,14 @@
 .header {
   background-color: $dark-3;
   height: 80px;
-  border-bottom: 1px solid $stroke-dark-grey;
 
   .logo-container {
     width: 300px;
     border-right: 1px solid $stroke-dark-grey;
     height: 100%;
+  }
 
-    &.sidebar-open {
-      border-bottom: 1px solid $stroke-dark-grey;
-    }
+  div:not(.logo-container) {
+    border-bottom: 1px solid $stroke-dark-grey;
   }
 }

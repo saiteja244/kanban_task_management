@@ -1,0 +1,20 @@
+.show-sidebar-btn {
+  background-color: $purple-dark;
+  position: fixed;
+  bottom: 20%;
+  width: 56px;
+  height: 48px;
+  border-radius: 0 100px 100px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background-color: $purple-light;
+
+    svg > path {
+      fill: black;
+    }
+  }
+}
