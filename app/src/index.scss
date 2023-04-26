@@ -47,8 +47,13 @@ button {
   align-items: center;
 }
 
+.logo > g > path {
+  fill: $white;
+}
+
 ///////////// Utilities
 @import "./assets/css/utilities";
 
 ///////////// Components
 @import "./components/Sidebar/sidebar";
+@import "./components/Header/header";
