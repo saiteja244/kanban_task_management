@@ -24,8 +24,6 @@ export const BoardContextProvider = ({ children }) => {
     changeBoard,
   };
 
-  console.log(boardData);
-
   // const memoedValues = useMemo(
   //   () => ({
   //     boardData,

@@ -12,6 +12,7 @@ import { UseModalContext } from "../../context/ModalContext";
 const TaskDetail = () => {
   const { boardData, setBoardData } = UseBoardContext();
   const [modalData, setModalData] = UseModalContext();
+  console.log(boardData);
 
   const {
     modalContent: { title, description, subtasks, status, id },

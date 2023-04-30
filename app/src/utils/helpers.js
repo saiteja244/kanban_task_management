@@ -65,10 +65,25 @@ export const findNestedObject = (parentObject, id) => {
   // I copy the object to avoid problems
   // just in case I have to mutate the returned value
   const parentObjectCopy = JSON.parse(JSON.stringify(parentObject));
+  let result;
 
   if (parentObjectCopy.id === id) {
     return parentObjectCopy;
   }
+
+  if (Array.isArray(parentObjectCopy)) {
+    for (const obj of parentObjectCopy) {
+      if (obj.id === id) {
+        result = obj;
+      } else {
+        result = findNestedObject(obj, id);
+        if (result) {
+          return result;
+        }
+      }
+    }
+  }
+
   for (const prop in parentObjectCopy) {
     if (isObject(parentObjectCopy[prop]) && parentObjectCopy[prop].id === id) {
       return parentObjectCopy[prop];
@@ -78,7 +93,7 @@ export const findNestedObject = (parentObject, id) => {
     }
     if (Array.isArray(parentObjectCopy[prop])) {
       for (const object of parentObjectCopy[prop]) {
-        const result = findNestedObject(object, id);
+        result = findNestedObject(object, id);
 
         if (result) return result;
       }
