@@ -1,0 +1,34 @@
+.modal {
+  background-color: $dark-3;
+  width: 100%;
+  max-width: 550px;
+  border-radius: $base-border-radius;
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h5 {
+      color: $white;
+      font-size: $font-header-lg;
+    }
+  }
+
+  .modal-content {
+    color: $grey;
+    margin: $base-margin 0;
+
+    p {
+      font-size: $font-sm-2;
+      line-height: $line-height-wide;
+    }
+  }
+}
+
+.subtask-list {
+  h5 {
+    color: $white;
+    font-size: $font-xs;
+  }
+}

@@ -24,9 +24,9 @@ const Sidebar = () => {
       <aside className={`sidebar ${appContext.sideBarOpen ? "show" : ""} `}>
         <div className="sidebar__items">
           <div>
-            <h2 className="p-6">All Boards</h2>
+            <h2 className="p-6">All Boards ({boardData.length})</h2>
             <ul>
-              {boardData.map((board) => {
+              {boardData.boardCollection.map((board) => {
                 const { id, name } = board;
                 return (
                   <BoardButton

@@ -5,7 +5,7 @@ import { UseBoardContext } from "../../context/BoardContext";
 
 const TasksBoard = () => {
   const [appState] = UseAppStateContext();
-  const { activeBoard } = UseBoardContext();
+  const { boardData } = UseBoardContext();
 
   return (
     <main
@@ -13,7 +13,7 @@ const TasksBoard = () => {
         appState.sideBarOpen ? "translate-sidebar" : ""
       }`}
     >
-      {activeBoard.columns.map((column) => {
+      {boardData.activeBoard.columns.map((column) => {
         const { id, name, tasks } = column;
         return <Column key={id} id={id} name={name} tasks={tasks} />;
       })}

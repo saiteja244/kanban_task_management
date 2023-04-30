@@ -4,10 +4,12 @@ import { UseBoardContext } from "../../context/BoardContext";
 
 // A child of Sidebar
 const BoardButton = ({ name, id, handleClick }) => {
-  const { activeBoard } = UseBoardContext();
+  const { boardData } = UseBoardContext();
   return (
     <li
-      className={`pt-1 pb-1 mt-1 mb-1 ${activeBoard.id === id ? "active" : ""}`}
+      className={`pt-1 pb-1 mt-1 mb-1 ${
+        boardData.activeBoard.id === id ? "active" : ""
+      }`}
     >
       <button className="center-vertical" onClick={() => handleClick(id)}>
         <BoardIcon />

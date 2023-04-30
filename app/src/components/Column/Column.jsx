@@ -10,13 +10,15 @@ const Column = ({ id, name, tasks }) => {
       <div>
         <ul>
           {tasks.map((task) => {
-            const { id, title, description, subtasks } = task;
+            const { id, title, description, subtasks, status } = task;
             return (
               <TaskCard
                 key={id}
                 title={title}
                 description={description}
                 subtasks={subtasks}
+                status={status}
+                id={id}
               />
             );
           })}

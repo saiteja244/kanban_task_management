@@ -17,13 +17,16 @@ $base-padding: 0.5rem;
 $base-margin: 0.5rem;
 
 // Font Sizes
+
 $font-header-sm: 0.8rem;
 $font-header-md: 0.9rem;
 $font-header-lg: 1.125rem;
 $font-header-xl: 1.5rem;
 
+$font-xs: 0.75rem;
 $font-sm: 0.8rem;
-$font-sm-2: 0.9rem;
+$font-sm-2: 0.8125rem;
+$font-sm-3: 0.9rem;
 $font-reg: 1rem;
 $font-reg-2: 1.1rem;
 
@@ -41,3 +44,6 @@ $stroke-dark-grey: #3e3f4e;
 
 // Letter Spacing
 $kerning-24: 2.4px;
+
+// Borders
+$base-border-radius: 4px;

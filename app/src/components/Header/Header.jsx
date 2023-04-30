@@ -5,7 +5,7 @@ import { UseBoardContext } from "../../context/BoardContext";
 
 const Header = () => {
   const [appState] = UseAppStateContext();
-  const { activeBoard } = UseBoardContext();
+  const { boardData } = UseBoardContext();
 
   return (
     <header className="header">
@@ -19,7 +19,7 @@ const Header = () => {
         </h1>
       </div>
       <div className="header__content">
-        <h2 className="ml-2">{activeBoard.name}</h2>
+        <h2 className="ml-2">{boardData.activeBoard.name}</h2>
       </div>
     </header>
   );
