@@ -1,7 +1,8 @@
 import React from "react";
 import { UseModalContext } from "../../context/ModalContext";
+import { findNestedObject } from "../../utils/helpers";
 
-const TaskCard = ({ id, title, description, status, subtasks }) => {
+const TaskCard = ({ id, columnName, title, description, status, subtasks }) => {
   const noOfCompletedTasks = subtasks.filter((task) => task.isCompleted).length;
   const [modalData, setModalData] = UseModalContext();
 
@@ -20,6 +21,7 @@ const TaskCard = ({ id, title, description, status, subtasks }) => {
             subtasks,
             status,
             id,
+            columnName,
           },
         }));
       }}

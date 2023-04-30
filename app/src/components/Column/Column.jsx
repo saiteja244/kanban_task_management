@@ -14,6 +14,7 @@ const Column = ({ id, name, tasks }) => {
             return (
               <TaskCard
                 key={id}
+                columnName={name}
                 title={title}
                 description={description}
                 subtasks={subtasks}

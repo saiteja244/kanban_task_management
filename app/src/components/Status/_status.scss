@@ -1,0 +1,50 @@
+.status-label {
+  font-size: $font-xs;
+  color: $white;
+  font-weight: $font-weight-bold;
+}
+
+.status-dropdown {
+  color: $white;
+  font-weight: $font-weight-light;
+  width: 100%;
+  position: relative;
+  border: 1px solid $dark-4;
+  border-radius: 4px;
+  padding: 0.25rem;
+  transition: border-color 0.3s ease;
+  margin-top: $base-margin;
+
+  &.active {
+    border-color: $purple-dark;
+  }
+
+  button:not(.option-item) {
+    width: 100%;
+  }
+
+  .select-icon {
+    position: absolute;
+    right: 10px;
+    transform: translateY(-250%);
+  }
+
+  .status-dropdown__list {
+    position: absolute;
+    background-color: $dark-2;
+    width: 100%;
+    left: 0;
+    padding: $base-padding;
+    margin-top: $base-margin * 1.25;
+    border-radius: 4px;
+  }
+
+  .option-item {
+    display: block;
+    margin: $base-margin * 1.5 0;
+    width: 100%;
+    color: $grey;
+    font-weight: $font-weight-reg;
+    font-size: $font-xs;
+  }
+}

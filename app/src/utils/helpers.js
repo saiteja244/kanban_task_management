@@ -102,10 +102,13 @@ export const findNestedObject = (parentObject, id) => {
   return null;
 };
 
-export const findParentColumnId = (activeBoard, taskStatus) => {
+export const findParentColumnData = (activeBoard, columnName) => {
   for (let column of activeBoard.columns) {
-    if (column.name === taskStatus) {
-      return column.id;
+    if (column.name === columnName) {
+      return {
+        columnID: column.id,
+        columnStatus: column.name,
+      };
     }
   }
 };

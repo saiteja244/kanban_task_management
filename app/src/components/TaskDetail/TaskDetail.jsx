@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { ReactComponent as EllipsisIcon } from "../../assets/svgs/icon-vertical-ellipsis.svg";
 import SubTask from "../SubTask/SubTask";
+import Status from "../Status/Status";
 import {
-  findParentColumnId,
+  findParentColumnData,
   findNestedObject,
   modifyNestedObject,
 } from "../../utils/helpers";
@@ -12,19 +13,30 @@ import { UseModalContext } from "../../context/ModalContext";
 const TaskDetail = () => {
   const { boardData, setBoardData } = UseBoardContext();
   const [modalData, setModalData] = UseModalContext();
-  console.log(boardData);
 
   const {
-    modalContent: { title, description, subtasks, status, id },
+    modalContent: { title, description, subtasks, status, id, columnName },
   } = modalData;
 
+  const parentColumnData = findParentColumnData(
+    boardData.activeBoard,
+    columnName
+  );
+
   const [taskInfo, setTaskInfo] = useState({
-    parentColumnId: findParentColumnId(boardData.activeBoard, status),
-    status: status,
+    parentColumnId: parentColumnData.columnID,
+    status: status || parentColumnData.columnStatus,
     id: id,
     title: title,
     description: description,
     subtasks: subtasks,
+    options: boardData.activeBoard.columns.reduce((arr, column) => {
+      if (!arr.includes(column.name)) {
+        arr.push(column.name);
+      }
+      return arr;
+    }, []),
+    statusActive: false,
   });
 
   const handleCheckboxChange = (taskID) => {
@@ -91,6 +103,9 @@ const TaskDetail = () => {
               />
             );
           })}
+      </div>
+      <div>
+        <Status options={taskInfo.options} activeStatus={taskInfo.status} />
       </div>
     </aside>
   );
