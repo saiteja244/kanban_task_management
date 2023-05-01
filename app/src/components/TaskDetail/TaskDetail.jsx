@@ -101,6 +101,20 @@ const TaskDetail = () => {
     });
   };
 
+  const handleEditTooltipClicked = () => {
+    setModalData({
+      isModalDisplayed: true,
+      modalToRender: "edit-task",
+      modalContent: {
+        title,
+        description,
+        subtasks,
+        status,
+        id,
+      },
+    });
+  };
+
   const handleCheckboxChange = (taskID) => {
     const subtaskToModify = findNestedObject(boardData, taskID);
 
@@ -161,7 +175,14 @@ const TaskDetail = () => {
             <EllipsisIcon />
           </span>
         </button>
-        {showTooltip ? <Tooltip val={"task"} /> : ""}
+        {showTooltip ? (
+          <Tooltip
+            val={"task"}
+            handleEditTooltipClicked={handleEditTooltipClicked}
+          />
+        ) : (
+          ""
+        )}
       </div>
       <div className="modal-content">
         <p>{taskInfo.description ? taskInfo.description : "No Description"}</p>

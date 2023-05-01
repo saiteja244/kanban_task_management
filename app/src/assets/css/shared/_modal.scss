@@ -30,3 +30,39 @@
     }
   }
 }
+
+.modal-form {
+  input,
+  textarea {
+    display: block;
+    width: 100%;
+    background: transparent;
+    border: 1px solid #828fa346;
+    border-radius: 4px;
+    font-family: inherit;
+    color: $white;
+    font-size: $font-sm-2;
+  }
+
+  label {
+    font-size: $font-xs;
+    color: $white;
+    font-weight: $font-weight-bold;
+  }
+
+  textarea {
+    resize: none;
+    line-height: 2.3;
+  }
+
+  .modal-btn--fw {
+    button {
+      width: 100%;
+      border-radius: 100px;
+      text-align: center;
+      background-color: $white;
+      color: $purple-dark;
+      font-size: $font-sm-2;
+    }
+  }
+}
