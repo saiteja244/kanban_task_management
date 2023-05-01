@@ -5,6 +5,7 @@ import Status from "../Status/Status";
 import {
   findParentColumnData,
   findNestedObject,
+  modifyObject,
   modifyNestedObject,
 } from "../../utils/helpers";
 import { UseBoardContext } from "../../context/BoardContext";
@@ -39,8 +40,67 @@ const TaskDetail = () => {
     statusActive: false,
   });
 
+  const changeTaskStatus = (e) => {
+    const columnName = e.target.value;
+    const newParentColumnID = findParentColumnData(
+      boardData.activeBoard,
+      columnName
+    );
+
+    setBoardData((prevData) => {
+      const columnToRemoveTaskFrom = findNestedObject(
+        prevData,
+        taskInfo.parentColumnId
+      );
+
+      const columnToInjectTaskInto = findNestedObject(
+        prevData,
+        newParentColumnID.columnID
+      );
+
+      const taskToChange = findNestedObject(boardData.activeBoard, taskInfo.id);
+
+      let finalBoard = modifyNestedObject(
+        prevData,
+        taskInfo.parentColumnId,
+        undefined,
+        {
+          tasks: columnToRemoveTaskFrom.tasks.filter((task) => {
+            return task.id !== taskInfo.id;
+          }),
+        }
+      );
+
+      finalBoard = modifyNestedObject(
+        finalBoard,
+        newParentColumnID.columnID,
+        undefined,
+        {
+          tasks: [
+            ...columnToInjectTaskInto.tasks,
+            modifyObject(taskToChange, undefined, { status: columnName }),
+          ],
+        }
+      );
+
+      return finalBoard;
+    });
+
+    setTaskInfo((prevTaskInfo) => ({
+      ...prevTaskInfo,
+      parentColumnId: newParentColumnID,
+      status: columnName,
+    }));
+
+    setModalData({
+      isModalDisplayed: false,
+      modalToRender: "",
+      modalContent: {},
+    });
+  };
+
   const handleCheckboxChange = (taskID) => {
-    const subtaskToModify = findNestedObject(boardData.boardCollection, taskID);
+    const subtaskToModify = findNestedObject(boardData, taskID);
 
     setTaskInfo((prevData) => {
       const updatedObject = modifyNestedObject(prevData, taskID, undefined, {
@@ -105,7 +165,11 @@ const TaskDetail = () => {
           })}
       </div>
       <div>
-        <Status options={taskInfo.options} activeStatus={taskInfo.status} />
+        <Status
+          options={taskInfo.options}
+          activeStatus={taskInfo.status}
+          changeTaskStatus={changeTaskStatus}
+        />
       </div>
     </aside>
   );

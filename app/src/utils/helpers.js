@@ -1,100 +1,79 @@
-function isObject(variable) {
-  return Object.prototype.toString.apply(variable) === "[object Object]";
-}
-const modifyObject = (
-  objectToModify,
-  propsToDelete,
-  modifiedKeyValuePairs = {}
-) => {
+const isObject = (value) => {
+  return Object.prototype.toString.apply(value) === "[object Object]";
+};
+
+const modifyObject = (objectToModify, propsToDelete, newValue) => {
   const objectToModifyCopy = JSON.parse(JSON.stringify(objectToModify));
+
   if (propsToDelete !== undefined) {
-    for (const prop of propsToDelete) {
+    for (prop in propsToDelete) {
       delete objectToModifyCopy[prop];
     }
   }
-  return Object.assign({}, objectToModifyCopy, modifiedKeyValuePairs);
+
+  return Object.assign({}, objectToModifyCopy, newValue);
 };
 
-export const modifyNestedObject = (
+const modifyNestedObject = (
   parentObject,
-  objectToModifyId,
+  objectToModifyID,
   propsToDelete,
-  modifiedKeyValuePairs
+  newValue
 ) => {
   const parentObjectCopy = JSON.parse(JSON.stringify(parentObject));
-  if (parentObjectCopy.id === objectToModifyId) {
-    return modifyObject(parentObjectCopy, propsToDelete, modifiedKeyValuePairs);
+
+  if (parentObjectCopy.id === objectToModifyID) {
+    return modifyObject(parentObjectCopy, propsToDelete, newValue);
   }
+
   for (const prop in parentObjectCopy) {
-    if (
-      isObject(parentObjectCopy[prop]) &&
-      parentObjectCopy[prop].id === objectToModifyId
-    ) {
-      parentObjectCopy[prop] = modifyObject(
-        parentObjectCopy[prop],
-        propsToDelete,
-        modifiedKeyValuePairs
-      );
-    }
-    if (
-      isObject(parentObjectCopy[prop]) &&
-      parentObjectCopy[prop].id !== objectToModifyId
-    ) {
-      parentObjectCopy[prop] = modifyNestedObject(
-        parentObjectCopy[prop],
-        objectToModifyId,
-        propsToDelete,
-        modifiedKeyValuePairs
-      );
-    }
-    if (Array.isArray(parentObjectCopy[prop])) {
-      parentObjectCopy[prop] = parentObjectCopy[prop].map((elmt) =>
-        modifyNestedObject(
-          elmt,
-          objectToModifyId,
+    if (isObject(parentObjectCopy[prop])) {
+      if (parentObjectCopy[prop].id === objectToModifyID) {
+        parentObjectCopy[prop] = modifyObject(
+          parentObjectCopy[prop],
           propsToDelete,
-          modifiedKeyValuePairs
-        )
-      );
+          newValue
+        );
+      } else {
+        parentObjectCopy[prop] = modifyNestedObject(
+          parentObjectCopy[prop],
+          objectToModifyID,
+          propsToDelete,
+          newValue
+        );
+      }
+    } else if (Array.isArray(parentObjectCopy[prop])) {
+      parentObjectCopy[prop] = parentObjectCopy[prop].map((el) => {
+        return modifyNestedObject(
+          el,
+          objectToModifyID,
+          propsToDelete,
+          newValue
+        );
+      });
     }
   }
+
   return parentObjectCopy;
 };
 
-export const findNestedObject = (parentObject, id) => {
-  // I copy the object to avoid problems
-  // just in case I have to mutate the returned value
+const findNestedObject = (parentObject, id) => {
   const parentObjectCopy = JSON.parse(JSON.stringify(parentObject));
-  let result;
 
   if (parentObjectCopy.id === id) {
     return parentObjectCopy;
   }
 
-  if (Array.isArray(parentObjectCopy)) {
-    for (const obj of parentObjectCopy) {
-      if (obj.id === id) {
-        result = obj;
-      } else {
-        result = findNestedObject(obj, id);
-        if (result) {
-          return result;
-        }
-      }
-    }
-  }
-
   for (const prop in parentObjectCopy) {
-    if (isObject(parentObjectCopy[prop]) && parentObjectCopy[prop].id === id) {
-      return parentObjectCopy[prop];
-    }
-    if (isObject(parentObjectCopy[prop]) && parentObjectCopy[prop].id !== id) {
-      return findNestedObject(parentObjectCopy[prop], id);
-    }
-    if (Array.isArray(parentObjectCopy[prop])) {
+    if (isObject(parentObjectCopy[prop])) {
+      if (parentObjectCopy[prop].id === id) {
+        return parentObjectCopy[prop];
+      } else {
+        return findNestedObject(parentObjectCopy[prop], id);
+      }
+    } else if (Array.isArray(parentObjectCopy[prop])) {
       for (const object of parentObjectCopy[prop]) {
-        result = findNestedObject(object, id);
-
+        let result = findNestedObject(object, id);
         if (result) return result;
       }
     }
@@ -102,8 +81,8 @@ export const findNestedObject = (parentObject, id) => {
   return null;
 };
 
-export const findParentColumnData = (activeBoard, columnName) => {
-  for (let column of activeBoard.columns) {
+const findParentColumnData = (activeBoard, columnName) => {
+  for (const column of activeBoard.columns) {
     if (column.name === columnName) {
       return {
         columnID: column.id,
@@ -111,4 +90,13 @@ export const findParentColumnData = (activeBoard, columnName) => {
       };
     }
   }
+
+  return null;
+};
+
+export {
+  modifyObject,
+  modifyNestedObject,
+  findNestedObject,
+  findParentColumnData,
 };

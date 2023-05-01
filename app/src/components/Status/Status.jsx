@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ReactComponent as IconChevronDown } from "../../assets/svgs/icon-chevron-down.svg";
 import { ReactComponent as IconChevronUp } from "../../assets/svgs/icon-chevron-up.svg";
 
-const Status = ({ options, activeStatus }) => {
+const Status = ({ options, activeStatus, changeTaskStatus }) => {
   const [listOpen, setListOpen] = useState(false);
   return (
     <>
@@ -19,7 +19,12 @@ const Status = ({ options, activeStatus }) => {
           <div className="status-dropdown__list">
             {options.map((option, index) => {
               return (
-                <button className="option-item" key={index}>
+                <button
+                  className="option-item"
+                  key={index}
+                  onClick={changeTaskStatus}
+                  value={option}
+                >
                   {option}
                 </button>
               );
