@@ -66,3 +66,7 @@ button {
 @import "./components/TaskDetail/taskdetail";
 @import "./components/SubTask/subtask";
 @import "./components/Status/status";
+@import "./components/Tooltip/tooltip";
+
+// Shared Modules
+@import "./assets/css/shared/modal.scss";

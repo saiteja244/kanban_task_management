@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { ReactComponent as EllipsisIcon } from "../../assets/svgs/icon-vertical-ellipsis.svg";
 import SubTask from "../SubTask/SubTask";
 import Status from "../Status/Status";
+import Tooltip from "../Tooltip/Tooltip";
 import {
   findParentColumnData,
   findNestedObject,
@@ -14,6 +15,7 @@ import { UseModalContext } from "../../context/ModalContext";
 const TaskDetail = () => {
   const { boardData, setBoardData } = UseBoardContext();
   const [modalData, setModalData] = UseModalContext();
+  const [showTooltip, setShowTooltip] = useState(false);
 
   const {
     modalContent: { title, description, subtasks, status, id, columnName },
@@ -136,10 +138,30 @@ const TaskDetail = () => {
   };
 
   return (
-    <aside className="modal pr-7 pl-7 pb-5 pt-5">
-      <div className="modal-header">
+    <aside
+      className="modal pr-7 pl-7 pb-5 pt-5"
+      onClick={(e) => {
+        if (
+          e.target !== e.currentTarget &&
+          !e.target.classList.contains("tooltip-btn") &&
+          showTooltip
+        ) {
+          setShowTooltip(false);
+        }
+      }}
+    >
+      <div className="modal-header view-task">
         <h5 className="pr-2">{taskInfo.title}</h5>
-        <EllipsisIcon />
+        <button
+          type="button"
+          className="tooltip-btn"
+          onClick={() => setShowTooltip(!showTooltip)}
+        >
+          <span>
+            <EllipsisIcon />
+          </span>
+        </button>
+        {showTooltip ? <Tooltip val={"task"} /> : ""}
       </div>
       <div className="modal-content">
         <p>{taskInfo.description ? taskInfo.description : "No Description"}</p>

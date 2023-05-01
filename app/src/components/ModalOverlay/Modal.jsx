@@ -9,7 +9,7 @@ const Modal = ({ modalData }) => {
   console.log(modalData);
   return (
     <aside className="modal pr-7 pl-7 pb-5 pt-5">
-      <div className="modal-header">
+      <div className="modal-header view-task">
         <h5 className="pr-2">{title}</h5>
         <EllipsisIcon />
       </div>

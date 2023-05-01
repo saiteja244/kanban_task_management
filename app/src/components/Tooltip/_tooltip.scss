@@ -1,0 +1,18 @@
+.tooltip-container {
+  background-color: $dark-3;
+  position: absolute;
+  top: 65px;
+  right: -60px;
+  min-width: 10rem;
+  border-radius: $base-border-radius;
+  padding: $base-padding;
+
+  button {
+    display: block;
+    width: 100%;
+    color: $grey;
+    &:last-of-type {
+      color: $red-1;
+    }
+  }
+}
