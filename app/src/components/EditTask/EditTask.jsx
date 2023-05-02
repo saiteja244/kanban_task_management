@@ -13,21 +13,23 @@ import { UseBoardContext } from "../../context/BoardContext";
 import Status from "../Status/Status";
 
 const EditTask = () => {
-  const [modalData] = UseModalContext();
+  const [modalData, setModalData] = UseModalContext();
   const { boardData, setBoardData } = UseBoardContext();
   const {
     id,
     title,
     description,
-    status,
+    status: status,
     subtasks: taskSubtasks,
   } = modalData.modalContent;
+
   const [taskInfo, setTaskInfo] = useState({
     id,
-    parentColumnID: findParentColumnData(boardData.activeBoard, status)
-      .columnID,
-    defaultStatus: status,
-    activeStatus: status,
+    parentColumnID: status
+      ? findParentColumnData(boardData.activeBoard, status).columnID
+      : boardData.activeBoard.columns[0].id,
+    defaultStatus: status || boardData.activeBoard.columns[0].name,
+    activeStatus: status || boardData.activeBoard.columns[0].name,
     statusOptions: boardData.activeBoard.columns.reduce((arr, column) => {
       if (!arr.includes(column.name)) {
         arr.push(column.name);
@@ -88,9 +90,7 @@ const EditTask = () => {
   const removeSubTask = (id) => {
     setTaskInfo((prevTaskInfo) => ({
       ...prevTaskInfo,
-      subtaskOptions: prevTaskInfo.subtasks.filter(
-        (subtask) => subtask.id !== id
-      ),
+      subtasks: prevTaskInfo.subtasks.filter((subtask) => subtask.id !== id),
     }));
   };
 
@@ -177,6 +177,12 @@ const EditTask = () => {
       }
 
       return finalBoard;
+    });
+
+    setModalData({
+      modalToRender: "",
+      isModalDisplayed: false,
+      modalContent: {},
     });
   };
 
