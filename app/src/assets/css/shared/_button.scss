@@ -1,0 +1,8 @@
+@mixin modal-btn($bg-color, $color) {
+  width: 100%;
+  text-align: center;
+  background-color: $bg-color;
+  color: $color;
+  font-size: $font-sm-2;
+  border-radius: 100px;
+}

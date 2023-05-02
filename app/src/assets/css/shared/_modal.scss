@@ -57,12 +57,11 @@
 
   .modal-btn--fw {
     button {
-      width: 100%;
-      border-radius: 100px;
-      text-align: center;
-      background-color: $white;
-      color: $purple-dark;
-      font-size: $font-sm-2;
+      @include modal-btn($white, $purple-dark);
+    }
+
+    button.save-changes {
+      @include modal-btn($purple-dark, $white);
     }
   }
 }

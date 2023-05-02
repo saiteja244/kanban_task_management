@@ -2,11 +2,11 @@ const isObject = (value) => {
   return Object.prototype.toString.apply(value) === "[object Object]";
 };
 
-const modifyObject = (objectToModify, propsToDelete, newValue) => {
+const modifyObject = (objectToModify, propsToDelete, newValue = {}) => {
   const objectToModifyCopy = JSON.parse(JSON.stringify(objectToModify));
 
   if (propsToDelete !== undefined) {
-    for (prop in propsToDelete) {
+    for (let prop in propsToDelete) {
       delete objectToModifyCopy[prop];
     }
   }

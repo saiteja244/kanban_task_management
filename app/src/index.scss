@@ -54,6 +54,9 @@ button {
 ///////////// Utilities
 @import "./assets/css/utilities";
 
+//////////// Mixins
+@import "./assets/css/shared/button";
+
 ///////////// Components
 @import "./components/ShowSidebarButton/showsidebarbutton";
 @import "./components/Sidebar/sidebar";

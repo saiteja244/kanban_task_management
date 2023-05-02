@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { UseModalContext } from "../../context/ModalContext";
+import {
+  findParentColumnData,
+  modifyNestedObject,
+  modifyObject,
+  findNestedObject,
+} from "../../utils/helpers";
 import { ReactComponent as CrossIcon } from "../../assets/svgs/icon-cross.svg";
 import { nanoid } from "nanoid";
 import { UseBoardContext } from "../../context/BoardContext";
@@ -8,19 +14,29 @@ import Status from "../Status/Status";
 
 const EditTask = () => {
   const [modalData] = UseModalContext();
-  const { boardData } = UseBoardContext();
-  const { id, title, description, status, subtasks } = modalData.modalContent;
+  const { boardData, setBoardData } = UseBoardContext();
+  const {
+    id,
+    title,
+    description,
+    status,
+    subtasks: taskSubtasks,
+  } = modalData.modalContent;
   const [taskInfo, setTaskInfo] = useState({
+    id,
+    parentColumnID: findParentColumnData(boardData.activeBoard, status)
+      .columnID,
+    defaultStatus: status,
     activeStatus: status,
-    options: boardData.activeBoard.columns.reduce((arr, column) => {
+    statusOptions: boardData.activeBoard.columns.reduce((arr, column) => {
       if (!arr.includes(column.name)) {
         arr.push(column.name);
       }
       return arr;
     }, []),
-    subtaskOptions: subtasks,
+    subtasks: taskSubtasks,
     description: description || "",
-    taskInfoTitle: title,
+    title,
   });
 
   const handleFormChange = (e) => {
@@ -31,7 +47,7 @@ const EditTask = () => {
         newTitle = e.target.value;
         return {
           ...prevTaskInfo,
-          taskInfoTitle: newTitle,
+          title: newTitle,
         };
       } else if (inputID.includes("description")) {
         newDescription = e.target.value;
@@ -42,7 +58,7 @@ const EditTask = () => {
       } else if (inputID.includes("subtask")) {
         const subTaskID = inputID.split("subtasks-")[1];
 
-        const arrCopy = [...prevTaskInfo.subtaskOptions];
+        const arrCopy = [...prevTaskInfo.subtasks];
 
         const subTaskToChange = arrCopy.find(
           (subtask) => subtask.id === subTaskID
@@ -63,7 +79,7 @@ const EditTask = () => {
 
         return {
           ...prevTaskInfo,
-          arrCopy,
+          subtaskOptions: arrCopy,
         };
       }
     });
@@ -72,7 +88,7 @@ const EditTask = () => {
   const removeSubTask = (id) => {
     setTaskInfo((prevTaskInfo) => ({
       ...prevTaskInfo,
-      subtaskOptions: prevTaskInfo.subtaskOptions.filter(
+      subtaskOptions: prevTaskInfo.subtasks.filter(
         (subtask) => subtask.id !== id
       ),
     }));
@@ -86,12 +102,81 @@ const EditTask = () => {
         isCompleted: false,
       };
 
-      const newSubtaskOptions = prevTaskInfo.subtaskOptions.push(newSubtask);
+      prevTaskInfo.subtasks.push(newSubtask);
 
       return {
         ...prevTaskInfo,
-        newSubtaskOptions,
       };
+    });
+  };
+
+  const changeTaskStatus = (e) => {
+    e.preventDefault();
+    setTaskInfo((prevTaskInfo) => {
+      const newTaskColumn = findParentColumnData(
+        boardData.activeBoard,
+        e.target.value
+      );
+
+      return {
+        ...prevTaskInfo,
+        activeStatus: e.target.value,
+        parentColumnID: newTaskColumn.columnID,
+      };
+    });
+  };
+
+  const handleSave = () => {
+    const formData = {
+      id: taskInfo.id,
+      title: taskInfo.title,
+      description: taskInfo.description,
+      subtasks: taskInfo.subtasks,
+      status: taskInfo.activeStatus,
+    };
+
+    setBoardData((prevData) => {
+      const newParentColumn = findNestedObject(
+        prevData,
+        taskInfo.parentColumnID
+      );
+
+      let finalBoard = modifyNestedObject(
+        prevData,
+        taskInfo.parentColumnID,
+        undefined,
+        {
+          tasks: [
+            ...newParentColumn.tasks.filter((task) => task.id !== taskInfo.id),
+            modifyObject(formData, undefined, {
+              subtasks: taskInfo.subtasks.map((subtask) => {
+                return modifyObject(subtask, undefined);
+              }),
+            }),
+          ],
+        }
+      );
+
+      if (taskInfo.activeStatus !== taskInfo.defaultStatus) {
+        const prevParentColumnID = findParentColumnData(
+          boardData.activeBoard,
+          taskInfo.defaultStatus
+        ).columnID;
+
+        const prevParentColumn = findNestedObject(prevData, prevParentColumnID);
+        finalBoard = modifyNestedObject(
+          finalBoard,
+          prevParentColumnID,
+          undefined,
+          {
+            tasks: prevParentColumn.tasks.filter(
+              (task) => task.id !== formData.id
+            ),
+          }
+        );
+      }
+
+      return finalBoard;
     });
   };
 
@@ -112,7 +197,7 @@ const EditTask = () => {
                 type="text"
                 id="title"
                 className="p-1 mt-1"
-                value={taskInfo.taskInfoTitle || ""}
+                value={taskInfo.title || ""}
                 onChange={handleFormChange}
               />
             </div>
@@ -130,7 +215,7 @@ const EditTask = () => {
             </div>
             <div className="form-group mt-1 mb-1">
               <label htmlFor="subtasks">Subtasks</label>
-              {taskInfo.subtaskOptions.map((subtask) => {
+              {taskInfo.subtasks.map((subtask) => {
                 const { id, title } = subtask;
                 return (
                   <div className="subtask-input__container mt-1" key={id}>
@@ -159,9 +244,19 @@ const EditTask = () => {
             </div>
             <div className="form-group mt-1 mb-1">
               <Status
-                options={taskInfo.options}
+                options={taskInfo.statusOptions}
                 activeStatus={taskInfo.activeStatus}
+                changeTaskStatus={changeTaskStatus}
               />
+            </div>
+            <div className="mt-1 mb-1 modal-btn--fw">
+              <button
+                className="save-changes pt-1 pb-1"
+                type="button"
+                onClick={handleSave}
+              >
+                Save Changes
+              </button>
             </div>
           </form>
         </div>

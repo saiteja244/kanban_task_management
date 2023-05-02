@@ -22,8 +22,12 @@ const Status = ({ options, activeStatus, changeTaskStatus }) => {
                 <button
                   className="option-item"
                   key={index}
-                  onClick={changeTaskStatus}
+                  onClick={(e) => {
+                    changeTaskStatus(e);
+                    setListOpen(false);
+                  }}
                   value={option}
+                  type="button"
                 >
                   {option}
                 </button>
