@@ -1,6 +1,7 @@
 import React from "react";
 import TaskDetail from "../TaskDetail/TaskDetail";
 import EditTask from "../EditTask/EditTask";
+import AddTask from "../AddTask/AddTask";
 import { motion } from "framer-motion";
 import { UseModalContext } from "../../context/ModalContext";
 import { UseBoardContext } from "../../context/BoardContext";
@@ -34,6 +35,8 @@ const ModalOverlay = ({ modalData }) => {
         <TaskDetail modalData={modalData} />
       ) : modalData.modalToRender === "edit-task" ? (
         <EditTask modalData={modalData} />
+      ) : modalData.modalToRender === "new-task" ? (
+        <AddTask />
       ) : (
         ""
       )}

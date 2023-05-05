@@ -70,7 +70,7 @@ button {
 @import "./components/SubTask/subtask";
 @import "./components/Status/status";
 @import "./components/Tooltip/tooltip";
-@import "./components/EditTask/edittask";
 
 // Shared Modules
-@import "./assets/css/shared/modal.scss";
+@import "./assets/css/shared/modal";
+@import "./assets/css/shared/taskmodal";

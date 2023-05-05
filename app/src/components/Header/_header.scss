@@ -5,7 +5,7 @@
   position: fixed;
   left: 0;
   top: 0;
-  width: 100vw;
+  min-width: 100%;
   z-index: 5;
 
   .logo-container {
@@ -20,9 +20,20 @@
 
   .header__content {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     color: $white;
     font-weight: $font-weight-light;
-    width: calc(100% - 300px);
+    min-width: calc(100% - 300px);
+
+    .header__content--btns {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .add-task-btn {
+    @include primary-btn($purple-dark, $white);
+    font-weight: $font-weight-reg;
   }
 }

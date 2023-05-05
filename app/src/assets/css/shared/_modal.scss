@@ -64,11 +64,11 @@
 
   .modal-btn--fw {
     button {
-      @include modal-btn($white, $purple-dark);
+      @include primary-btn($white, $purple-dark);
     }
 
     button.save-changes {
-      @include modal-btn($purple-dark, $white);
+      @include primary-btn($purple-dark, $white);
     }
   }
 }
