@@ -25,6 +25,9 @@ const EditTask = () => {
 
   const [taskInfo, setTaskInfo] = useState({
     id,
+    defaultParentColumnID: status
+      ? findParentColumnData(boardData.activeBoard, status).columnID
+      : boardData.activeBoard.columns[0].id,
     parentColumnID: status
       ? findParentColumnData(boardData.activeBoard, status).columnID
       : boardData.activeBoard.columns[0].id,
@@ -36,10 +39,52 @@ const EditTask = () => {
       }
       return arr;
     }, []),
-    subtasks: taskSubtasks,
+    subtasks: [
+      ...taskSubtasks.map((subtask) => {
+        return {
+          ...subtask,
+          isValid: true,
+        };
+      }),
+    ],
     description: description || "",
     title,
   });
+
+  const [taskTitleValid, setTaskTitleValid] = useState(true);
+
+  const checkFormValidity = () => {
+    const validSubtasks = [];
+
+    taskInfo.subtasks.forEach((subtask) => {
+      if (!subtask.title) {
+        setTaskInfo((prevTaskInfo) => ({
+          ...prevTaskInfo,
+          subtasks: prevTaskInfo.subtasks.map((nestedSubtask) => {
+            if (subtask.id === nestedSubtask.id) {
+              nestedSubtask.isValid = false;
+            }
+            return nestedSubtask;
+          }),
+        }));
+      } else {
+        validSubtasks.push(subtask);
+      }
+    });
+
+    if (taskInfo.title === "") {
+      setTaskTitleValid(false);
+    }
+
+    if (
+      validSubtasks.length !== taskInfo.subtasks.length ||
+      taskInfo.title === ""
+    ) {
+      return false;
+    } else {
+      return true;
+    }
+  };
 
   const handleFormChange = (e) => {
     const inputID = e.target.id;
@@ -47,6 +92,11 @@ const EditTask = () => {
       let newTitle, newDescription;
       if (inputID.includes("title")) {
         newTitle = e.target.value;
+
+        if (newTitle) {
+          setTaskTitleValid(true);
+        }
+
         return {
           ...prevTaskInfo,
           title: newTitle,
@@ -68,6 +118,12 @@ const EditTask = () => {
 
         subTaskToChange.title = e.target.value;
 
+        if (subTaskToChange.title) {
+          subTaskToChange.isValid = true;
+        } else {
+          subTaskToChange.isValid = false;
+        }
+
         // Find the subtask to be updated in subtask array.
         // Use arr.splice to inject to replace old subtask with new
         for (let i = 0; i < arrCopy.length; i++) {
@@ -81,7 +137,7 @@ const EditTask = () => {
 
         return {
           ...prevTaskInfo,
-          subtaskOptions: arrCopy,
+          subtasks: arrCopy,
         };
       }
     });
@@ -100,6 +156,7 @@ const EditTask = () => {
         id: nanoid(),
         title: "",
         isCompleted: false,
+        isValid: true,
       };
 
       prevTaskInfo.subtasks.push(newSubtask);
@@ -127,6 +184,10 @@ const EditTask = () => {
   };
 
   const handleSave = () => {
+    const formValid = checkFormValidity();
+
+    if (!formValid) return;
+
     const formData = {
       id: taskInfo.id,
       title: taskInfo.title,
@@ -134,6 +195,15 @@ const EditTask = () => {
       subtasks: taskInfo.subtasks,
       status: taskInfo.activeStatus,
     };
+
+    const currentParentColumn = findNestedObject(
+      boardData,
+      taskInfo.defaultParentColumnID
+    );
+
+    const taskIndex = currentParentColumn.tasks.indexOf(
+      currentParentColumn.tasks.find((task) => task.id === taskInfo.id)
+    );
 
     setBoardData((prevData) => {
       const newParentColumn = findNestedObject(
@@ -147,12 +217,12 @@ const EditTask = () => {
         undefined,
         {
           tasks: [
-            ...newParentColumn.tasks.filter((task) => task.id !== taskInfo.id),
             modifyObject(formData, undefined, {
               subtasks: taskInfo.subtasks.map((subtask) => {
                 return modifyObject(subtask, undefined);
               }),
             }),
+            ...newParentColumn.tasks.filter((task) => task.id !== taskInfo.id),
           ],
         }
       );
@@ -198,14 +268,19 @@ const EditTask = () => {
           <h5>Edit Task</h5>
           <form className="modal-form">
             <div className="form-group mt-1 mb-1">
-              <label htmlFor="title">Title</label>
-              <input
-                type="text"
-                id="title"
-                className="p-1 mt-1"
-                value={taskInfo.title || ""}
-                onChange={handleFormChange}
-              />
+              <label
+                htmlFor="title"
+                className={`title-label ${!taskTitleValid ? "error" : ""}`}
+              >
+                Title
+                <input
+                  type="text"
+                  id="title"
+                  className="p-1 mt-1"
+                  value={taskInfo.title || ""}
+                  onChange={handleFormChange}
+                />
+              </label>
             </div>
             <div className="form-group mt-1 mb-1">
               <label htmlFor="description">Description</label>
@@ -222,16 +297,21 @@ const EditTask = () => {
             <div className="form-group mt-1 mb-1">
               <label htmlFor="subtasks">Subtasks</label>
               {taskInfo.subtasks.map((subtask) => {
-                const { id, title } = subtask;
+                const { id, title, isValid } = subtask;
                 return (
                   <div className="subtask-input__container mt-1" key={id}>
-                    <input
-                      type="text"
-                      id={`subtasks-${id}`}
-                      className="p-1"
-                      value={title}
-                      onChange={handleFormChange}
-                    />
+                    <label
+                      className={`subtask-label ${!isValid ? "error" : ""}`}
+                    >
+                      <input
+                        type="text"
+                        id={`subtasks-${id}`}
+                        className="p-1"
+                        value={title}
+                        onChange={handleFormChange}
+                      />
+                    </label>
+
                     <button type="button" onClick={() => removeSubTask(id)}>
                       <CrossIcon className="ml-1" />
                     </button>

@@ -79,8 +79,8 @@ const TaskDetail = () => {
         undefined,
         {
           tasks: [
-            ...columnToInjectTaskInto.tasks,
             modifyObject(taskToChange, undefined, { status: columnName }),
+            ...columnToInjectTaskInto.tasks,
           ],
         }
       );

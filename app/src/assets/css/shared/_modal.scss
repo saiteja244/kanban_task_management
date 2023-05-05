@@ -42,6 +42,7 @@
     font-family: inherit;
     color: $white;
     font-size: $font-sm-2;
+    position: relative;
   }
 
   label {
@@ -53,6 +54,12 @@
   textarea {
     resize: none;
     line-height: 2.3;
+  }
+
+  input:focus,
+  textarea:focus {
+    border: 1px solid $purple-dark;
+    outline: none;
   }
 
   .modal-btn--fw {

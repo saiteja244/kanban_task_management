@@ -11,11 +11,13 @@ const ModalOverlay = ({ modalData }) => {
 
   const closeModal = (e) => {
     if (e.target === e.currentTarget) {
-      setModalData((prevData) => ({
-        ...prevData,
-        isModalDisplayed: false,
-        modalToRender: "",
-      }));
+      setModalData((prevData) => {
+        return {
+          ...prevData,
+          isModalDisplayed: false,
+          modalToRender: "",
+        };
+      });
     }
   };
 
