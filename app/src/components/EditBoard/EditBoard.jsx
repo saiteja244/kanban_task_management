@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { UseModalContext } from "../../context/ModalContext";
 import { UseBoardContext } from "../../context/BoardContext";
-
+import {
+  modifyNestedObject,
+  modifyObject,
+  findNestedObject,
+} from "../../utils/helpers";
 import { ReactComponent as CrossIcon } from "../../assets/svgs/icon-cross.svg";
 
 import { nanoid } from "nanoid";
@@ -87,22 +91,23 @@ const EditBoard = () => {
 
     if (!formValid) return;
 
-    setBoardData((prevBoardData) => ({
-      ...prevBoardData,
-      boardCollection: [
-        ...prevBoardData.boardCollection,
-        modifyObject(boardInfo, ["isValid"], {
+    setBoardData((prevBoardData) => {
+      return modifyNestedObject(
+        prevBoardData,
+        id,
+        undefined,
+        modifyObject(boardInfo, undefined, {
           columns: boardInfo.columns.map((column) => {
-            return modifyObject(column, ["isValid"], {
-              tasks: [],
+            return modifyObject(column, undefined, {
+              tasks: column.tasks.map((task) => ({
+                ...task,
+                status: column.name,
+              })),
             });
           }),
-        }),
-      ],
-      get activeBoard() {
-        return this.boardCollection[prevBoardData.boardCollection.length];
-      },
-    }));
+        })
+      );
+    });
 
     setModalData({
       isModalDisplayed: false,
