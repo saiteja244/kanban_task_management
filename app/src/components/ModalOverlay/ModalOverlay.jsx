@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { UseModalContext } from "../../context/ModalContext";
 import { UseBoardContext } from "../../context/BoardContext";
 import ConfirmDeleteModal from "../ConfirmDeleteModal/ConfirmDeleteModal";
+import AddBoard from "../AddBoard/AddBoard";
 
 const ModalOverlay = ({ modalData }) => {
   const [_, setModalData] = UseModalContext();
@@ -40,6 +41,8 @@ const ModalOverlay = ({ modalData }) => {
         <AddTask />
       ) : modalData.modalToRender === "delete-task" ? (
         <ConfirmDeleteModal />
+      ) : modalData.modalToRender === "create-board" ? (
+        <AddBoard />
       ) : (
         ""
       )}

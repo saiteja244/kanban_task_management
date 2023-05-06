@@ -1,11 +1,14 @@
 import React from "react";
 import { ReactComponent as SidebarHideIcon } from "../../assets/svgs/icon-hide-sidebar.svg";
+import { ReactComponent as BoardIcon } from "../../assets/svgs/icon-board.svg";
 import { UseAppStateContext } from "../../context/AppStateContext";
 import { UseBoardContext } from "../../context/BoardContext";
+import { UseModalContext } from "../../context/ModalContext";
 import BoardButton from "../BoardButton/BoardButton";
 
 const Sidebar = () => {
   const [appContext, setAppContext] = UseAppStateContext();
+  const [_, setModalData] = UseModalContext();
   const { boardData, changeBoard } = UseBoardContext();
 
   const handleHideSidebar = () => {
@@ -17,6 +20,14 @@ const Sidebar = () => {
 
   const handleClick = (id) => {
     changeBoard(id);
+  };
+
+  const handleCreateBoard = () => {
+    setModalData({
+      isModalDisplayed: true,
+      modalToRender: "create-board",
+      modalContent: {},
+    });
   };
 
   return (
@@ -37,6 +48,14 @@ const Sidebar = () => {
                   />
                 );
               })}
+              <button
+                className="center-vertical create-board"
+                type="button"
+                onClick={handleCreateBoard}
+              >
+                <BoardIcon />
+                <span className="ml-2"> &#43; Create New Board</span>
+              </button>
             </ul>
           </div>
         </div>

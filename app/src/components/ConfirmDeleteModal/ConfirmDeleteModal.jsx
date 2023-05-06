@@ -4,7 +4,7 @@ import { UseBoardContext } from "../../context/BoardContext";
 import { UseModalContext } from "../../context/ModalContext";
 import { findNestedObject, modifyNestedObject } from "../../utils/helpers";
 
-const ConfirmDeleteModal = ({ action, itemName }) => {
+const ConfirmDeleteModal = () => {
   const { setBoardData } = UseBoardContext();
   const [modalData, setModalData] = UseModalContext();
 

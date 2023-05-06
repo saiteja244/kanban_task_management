@@ -299,9 +299,14 @@ const EditTask = () => {
               {taskInfo.subtasks.map((subtask) => {
                 const { id, title, isValid } = subtask;
                 return (
-                  <div className="subtask-input__container mt-1" key={id}>
+                  <div
+                    className="subtask-column-input__container mt-1"
+                    key={id}
+                  >
                     <label
-                      className={`subtask-label ${!isValid ? "error" : ""}`}
+                      className={`subtask-column-label ${
+                        !isValid ? "error" : ""
+                      }`}
                     >
                       <input
                         type="text"

@@ -66,4 +66,12 @@
   button:not(ul button) {
     font-size: $font-sm;
   }
+
+  .create-board {
+    color: $purple-dark;
+
+    svg path {
+      fill: $purple-dark;
+    }
+  }
 }

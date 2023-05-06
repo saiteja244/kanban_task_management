@@ -6,7 +6,7 @@ const modifyObject = (objectToModify, propsToDelete, newValue = {}) => {
   const objectToModifyCopy = JSON.parse(JSON.stringify(objectToModify));
 
   if (propsToDelete !== undefined) {
-    for (let prop in propsToDelete) {
+    for (let prop of propsToDelete) {
       delete objectToModifyCopy[prop];
     }
   }
