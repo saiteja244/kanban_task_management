@@ -1,31 +1,42 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { UseBoardContext } from "../../context/BoardContext";
 import { UseModalContext } from "../../context/ModalContext";
 import { findNestedObject, modifyNestedObject } from "../../utils/helpers";
 
 const ConfirmDeleteModal = () => {
-  const { setBoardData } = UseBoardContext();
+  const { boardData, setBoardData } = UseBoardContext();
   const [modalData, setModalData] = UseModalContext();
 
   const {
     modalToRender,
-    modalContent: { taskId, itemTitle, parentColumnId },
+    modalContent: { id, itemTitle, parentColumnId },
   } = modalData;
 
   const handleDelete = () => {
-    setBoardData((prevBoardData) => {
-      const columnToRemoveTaskFrom = findNestedObject(
-        prevBoardData,
-        parentColumnId
-      );
+    if (modalToRender === "delete-task") {
+      setBoardData((prevBoardData) => {
+        const columnToRemoveTaskFrom = findNestedObject(
+          prevBoardData,
+          parentColumnId
+        );
 
-      return modifyNestedObject(prevBoardData, parentColumnId, undefined, {
-        tasks: columnToRemoveTaskFrom.tasks.filter(
-          (task) => task.id !== taskId
-        ),
+        return modifyNestedObject(prevBoardData, parentColumnId, undefined, {
+          tasks: columnToRemoveTaskFrom.tasks.filter((task) => task.id !== id),
+        });
       });
-    });
+    } else {
+      console.log(id);
+      setBoardData((prevBoardData) => ({
+        ...prevBoardData,
+        boardCollection: prevBoardData.boardCollection.filter(
+          (board) => board.id !== id
+        ),
+        get activeBoard() {
+          return this.boardCollection[0] || { name: "No Boards" };
+        },
+      }));
+    }
 
     setModalData({
       modalToRender: "",
@@ -33,6 +44,10 @@ const ConfirmDeleteModal = () => {
       modalContent: {},
     });
   };
+
+  useEffect(() => {
+    console.log(boardData);
+  }, [boardData]);
 
   return (
     <AnimatePresence>

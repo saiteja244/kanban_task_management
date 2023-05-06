@@ -6,8 +6,34 @@
   gap: 1rem;
   padding: 1rem;
   margin-top: 90px;
+  min-height: calc(100vh - 90px);
 }
 
 .translate-sidebar {
   transform: translateX(300px);
+}
+
+.narrow-width {
+  // Change the width when sidebar is open
+  // Apply only when there are no boards available.
+  width: calc(100% - 300px);
+}
+
+.no-boards-alert--container {
+  transition: width 0.3s ease;
+  min-height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  h3 {
+    color: $grey;
+  }
+}
+
+.create-board-btn {
+  @include primary-btn($purple-dark, $white);
+  width: initial;
 }

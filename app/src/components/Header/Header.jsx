@@ -38,7 +38,18 @@ const Header = () => {
     setShowTooltip(false);
   };
 
-  const handleDelete = () => {};
+  const handleDelete = () => {
+    setModalData({
+      modalToRender: "delete-board",
+      isModalDisplayed: true,
+      modalContent: {
+        id: boardData.activeBoard.id,
+        itemTitle: boardData.activeBoard.name,
+      },
+    });
+
+    setShowTooltip(false);
+  };
 
   return (
     <header className="header">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import { ReactComponent as SidebarHideIcon } from "../../assets/svgs/icon-hide-sidebar.svg";
 import { ReactComponent as BoardIcon } from "../../assets/svgs/icon-board.svg";
 import { UseAppStateContext } from "../../context/AppStateContext";
@@ -10,6 +10,12 @@ const Sidebar = () => {
   const [appContext, setAppContext] = UseAppStateContext();
   const [_, setModalData] = UseModalContext();
   const { boardData, changeBoard } = UseBoardContext();
+
+  const sideBarRef = useRef();
+
+  useEffect(() => {
+    console.log(sideBarRef.current.getBoundingClientRect());
+  }, [appContext.sideBarOpen]);
 
   const handleHideSidebar = () => {
     setAppContext((prevAppContext) => ({
@@ -32,7 +38,10 @@ const Sidebar = () => {
 
   return (
     <>
-      <aside className={`sidebar ${appContext.sideBarOpen ? "show" : ""} `}>
+      <aside
+        className={`sidebar ${appContext.sideBarOpen ? "show" : ""} `}
+        ref={sideBarRef}
+      >
         <div className="sidebar__items">
           <div>
             <h2 className="p-6">All Boards ({boardData.length})</h2>

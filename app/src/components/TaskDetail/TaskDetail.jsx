@@ -156,7 +156,7 @@ const TaskDetail = () => {
       modalToRender: "delete-task",
       isModalDisplayed: true,
       modalContent: {
-        taskId: taskInfo.id,
+        id: taskInfo.id,
         parentColumnId: taskInfo.parentColumnId,
         itemTitle: title,
       },

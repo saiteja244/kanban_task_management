@@ -46,6 +46,8 @@ const ModalOverlay = ({ modalData }) => {
         <AddBoard />
       ) : modalData.modalToRender === "edit-board" ? (
         <EditBoard />
+      ) : modalData.modalToRender === "delete-board" ? (
+        <ConfirmDeleteModal />
       ) : (
         ""
       )}
