@@ -6,3 +6,12 @@
   font-size: $font-sm-2;
   border-radius: 100px;
 }
+
+.tooltip-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:focus {
+    border: 1px solid $purple-dark;
+  }
+}

@@ -14,10 +14,6 @@
     height: 100%;
   }
 
-  div:not(.logo-container) {
-    border-bottom: 1px solid $stroke-dark-grey;
-  }
-
   .header__content {
     display: flex;
     justify-content: space-between;
@@ -25,6 +21,7 @@
     color: $white;
     font-weight: $font-weight-light;
     min-width: calc(100% - 300px);
+    border-bottom: 1px solid $stroke-dark-grey;
 
     .header__content--btns {
       display: flex;

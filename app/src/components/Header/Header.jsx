@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { ReactComponent as Logo } from "../../assets/svgs/logo-dark.svg";
 import { ReactComponent as EllipsisIcon } from "../../assets/svgs/icon-vertical-ellipsis.svg";
 import { UseAppStateContext } from "../../context/AppStateContext";
 import { UseModalContext } from "../../context/ModalContext";
 import { UseBoardContext } from "../../context/BoardContext";
+import Tooltip from "../Tooltip/Tooltip";
 import { nanoid } from "nanoid";
 
 const Header = () => {
   const [appState] = UseAppStateContext();
   const [_, setModalData] = UseModalContext();
   const { boardData } = UseBoardContext();
+
+  const [showTooltip, setShowTooltip] = useState(false);
 
   const handleNewTaskModal = () => {
     setModalData({
@@ -20,6 +23,22 @@ const Header = () => {
       },
     });
   };
+
+  const handleEditTooltipClicked = () => {
+    setModalData({
+      isModalDisplayed: true,
+      modalToRender: "edit-board",
+      modalContent: {
+        id: boardData.activeBoard.id,
+        name: boardData.activeBoard.name,
+        columns: boardData.activeBoard.columns,
+      },
+    });
+
+    setShowTooltip(false);
+  };
+
+  const handleDelete = () => {};
 
   return (
     <header className="header">
@@ -42,7 +61,22 @@ const Header = () => {
           >
             &#43; Add New Task
           </button>
-          <EllipsisIcon className="ml-2" />
+          <button
+            type="button"
+            className="tooltip-btn"
+            onClick={() => setShowTooltip(!showTooltip)}
+          >
+            <EllipsisIcon className="ml-2" />
+          </button>
+          {showTooltip ? (
+            <Tooltip
+              val="board"
+              handleEditTooltipClicked={handleEditTooltipClicked}
+              handleDelete={handleDelete}
+            />
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </header>

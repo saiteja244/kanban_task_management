@@ -7,6 +7,7 @@ import { UseModalContext } from "../../context/ModalContext";
 import { UseBoardContext } from "../../context/BoardContext";
 import ConfirmDeleteModal from "../ConfirmDeleteModal/ConfirmDeleteModal";
 import AddBoard from "../AddBoard/AddBoard";
+import EditBoard from "../EditBoard/EditBoard";
 
 const ModalOverlay = ({ modalData }) => {
   const [_, setModalData] = UseModalContext();
@@ -43,6 +44,8 @@ const ModalOverlay = ({ modalData }) => {
         <ConfirmDeleteModal />
       ) : modalData.modalToRender === "create-board" ? (
         <AddBoard />
+      ) : modalData.modalToRender === "edit-board" ? (
+        <EditBoard />
       ) : (
         ""
       )}

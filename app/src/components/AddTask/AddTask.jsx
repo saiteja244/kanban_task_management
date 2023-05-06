@@ -230,92 +230,89 @@ const AddTask = () => {
       >
         <div className="modal-header">
           <h5>Add New Task</h5>
-          <form className="modal-form">
-            <div className="form-group mt-1 mb-1">
-              <label
-                htmlFor="title"
-                className={`title-label ${!taskTitleValid ? "error" : ""}`}
-              >
-                Title
-                <input
-                  type="text"
-                  id="title"
-                  className="p-1 mt-1"
-                  value={taskInfo.title || ""}
-                  onChange={handleFormChange}
-                />
-              </label>
-            </div>
-            <div className="form-group mt-1 mb-1">
-              <label htmlFor="description">Description</label>
-              <textarea
-                id="description"
+        </div>
+        <form className="modal-form">
+          <div className="form-group mt-1 mb-1">
+            <label
+              htmlFor="title"
+              className={`title-label ${!taskTitleValid ? "error" : ""}`}
+            >
+              Title
+              <input
+                type="text"
+                id="title"
                 className="p-1 mt-1"
-                cols="30"
-                rows="5"
-                value={taskInfo.description || ""}
+                value={taskInfo.title || ""}
                 onChange={handleFormChange}
-                placeholder="e.g. It’s always good to take a break. This 15 minute break will recharge the batteries a little."
-              ></textarea>
-            </div>
-            <div className="form-group mt-1 mb-1">
-              <label htmlFor="subtasks">Subtasks</label>
-              {taskInfo.subtasks.map((subtask) => {
-                const { id, title, placeholder, isValid } = subtask;
-                return (
-                  <div
-                    className="subtask-column-input__container mt-1"
-                    key={id}
-                  >
-                    <label
-                      className={`subtask-column-label ${
-                        !isValid ? "error" : ""
-                      }`}
-                    >
-                      <input
-                        type="text"
-                        id={`subtasks-${id}`}
-                        className="p-1"
-                        value={title}
-                        onChange={handleFormChange}
-                        placeholder={placeholder}
-                      />
-                    </label>
-
-                    <button type="button" onClick={() => removeSubTask(id)}>
-                      <CrossIcon className="ml-1" />
-                    </button>
-                  </div>
-                );
-              })}
-              <div className="modal-btn--fw mt-1">
-                <button
-                  className="pt-1 pb-1"
-                  type="button"
-                  onClick={addNewSubTask}
-                >
-                  &#43; Add New Subtask
-                </button>
-              </div>
-            </div>
-            <div className="form-group mt-1 mb-1">
-              <Status
-                options={taskInfo.statusOptions}
-                activeStatus={taskInfo.activeStatus}
-                changeTaskStatus={changeTaskStatus}
               />
-            </div>
-            <div className="mt-1 mb-1 modal-btn--fw">
+            </label>
+          </div>
+          <div className="form-group mt-1 mb-1">
+            <label htmlFor="description">Description</label>
+            <textarea
+              id="description"
+              className="p-1 mt-1"
+              cols="30"
+              rows="5"
+              value={taskInfo.description || ""}
+              onChange={handleFormChange}
+              placeholder="e.g. It’s always good to take a break. This 15 minute break will recharge the batteries a little."
+            ></textarea>
+          </div>
+          <div className="form-group mt-1 mb-1">
+            <label htmlFor="subtasks">Subtasks</label>
+            {taskInfo.subtasks.map((subtask) => {
+              const { id, title, placeholder, isValid } = subtask;
+              return (
+                <div className="subtask-column-input__container mt-1" key={id}>
+                  <label
+                    className={`subtask-column-label ${
+                      !isValid ? "error" : ""
+                    }`}
+                  >
+                    <input
+                      type="text"
+                      id={`subtasks-${id}`}
+                      className="p-1"
+                      value={title}
+                      onChange={handleFormChange}
+                      placeholder={placeholder}
+                    />
+                  </label>
+
+                  <button type="button" onClick={() => removeSubTask(id)}>
+                    <CrossIcon className="ml-1" />
+                  </button>
+                </div>
+              );
+            })}
+            <div className="modal-btn--fw mt-1">
               <button
-                className="save-changes pt-1 pb-1"
+                className="pt-1 pb-1"
                 type="button"
-                onClick={handleSave}
+                onClick={addNewSubTask}
               >
-                Save Changes
+                &#43; Add New Subtask
               </button>
             </div>
-          </form>
-        </div>
+          </div>
+          <div className="form-group mt-1 mb-1">
+            <Status
+              options={taskInfo.statusOptions}
+              activeStatus={taskInfo.activeStatus}
+              changeTaskStatus={changeTaskStatus}
+            />
+          </div>
+          <div className="mt-1 mb-1 modal-btn--fw">
+            <button
+              className="save-changes pt-1 pb-1"
+              type="button"
+              onClick={handleSave}
+            >
+              Save Changes
+            </button>
+          </div>
+        </form>
       </motion.aside>
     </AnimatePresence>
   );

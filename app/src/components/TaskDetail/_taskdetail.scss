@@ -1,13 +1,3 @@
-// Maybe make this a shared class?
-.tooltip-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  &:focus {
-    border: 1px solid $purple-dark;
-  }
-}
-
 .subtask-list {
   h5 {
     color: $white;
