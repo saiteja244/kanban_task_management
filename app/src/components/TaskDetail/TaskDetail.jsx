@@ -151,6 +151,18 @@ const TaskDetail = () => {
     });
   };
 
+  const handleDelete = () => {
+    setModalData({
+      modalToRender: "delete-task",
+      isModalDisplayed: true,
+      modalContent: {
+        taskId: taskInfo.id,
+        parentColumnId: taskInfo.parentColumnId,
+        itemTitle: title,
+      },
+    });
+  };
+
   return (
     <aside
       className="modal pr-7 pl-7 pb-5 pt-5"
@@ -179,6 +191,7 @@ const TaskDetail = () => {
           <Tooltip
             val={"task"}
             handleEditTooltipClicked={handleEditTooltipClicked}
+            handleDelete={handleDelete}
           />
         ) : (
           ""

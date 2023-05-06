@@ -1,0 +1,29 @@
+.delete-modal {
+  width: 100%;
+  max-width: 520px;
+  background-color: $dark-3;
+  border-radius: $base-border-radius;
+
+  p {
+    color: $grey;
+    font-size: $font-sm-2;
+    line-height: 23px;
+  }
+
+  .action-btn-container {
+    display: flex;
+  }
+
+  h5 {
+    color: $red-1;
+    font-size: $font-header-lg;
+  }
+
+  .confirm-delete-btn {
+    @include primary-btn($red-1, $white);
+  }
+
+  .cancel-delete-btn {
+    @include primary-btn($white, $purple-dark);
+  }
+}

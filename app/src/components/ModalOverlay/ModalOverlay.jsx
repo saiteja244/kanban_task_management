@@ -5,6 +5,7 @@ import AddTask from "../AddTask/AddTask";
 import { motion } from "framer-motion";
 import { UseModalContext } from "../../context/ModalContext";
 import { UseBoardContext } from "../../context/BoardContext";
+import ConfirmDeleteModal from "../ConfirmDeleteModal/ConfirmDeleteModal";
 
 const ModalOverlay = ({ modalData }) => {
   const [_, setModalData] = UseModalContext();
@@ -37,6 +38,8 @@ const ModalOverlay = ({ modalData }) => {
         <EditTask modalData={modalData} />
       ) : modalData.modalToRender === "new-task" ? (
         <AddTask />
+      ) : modalData.modalToRender === "delete-task" ? (
+        <ConfirmDeleteModal />
       ) : (
         ""
       )}

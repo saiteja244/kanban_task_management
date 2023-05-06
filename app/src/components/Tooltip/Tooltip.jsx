@@ -10,7 +10,7 @@ const Tooltip = ({ val, handleEditTooltipClicked, handleDelete }) => {
       >
         Edit {val}
       </button>
-      <button type="button" className="tooltip-btn">
+      <button type="button" className="tooltip-btn" onClick={handleDelete}>
         Delete {val}
       </button>
     </div>
