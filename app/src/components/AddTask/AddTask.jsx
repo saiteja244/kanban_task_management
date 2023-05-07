@@ -286,7 +286,7 @@ const AddTask = () => {
                 </div>
               );
             })}
-            <div className="modal-btn--fw mt-1">
+            <div className="modal-btn--secondary mt-1">
               <button
                 className="pt-1 pb-1"
                 type="button"
@@ -303,7 +303,7 @@ const AddTask = () => {
               changeTaskStatus={changeTaskStatus}
             />
           </div>
-          <div className="mt-1 mb-1 modal-btn--fw">
+          <div className="mt-1 mb-1">
             <button
               className="save-changes pt-1 pb-1"
               type="button"

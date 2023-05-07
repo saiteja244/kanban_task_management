@@ -1,8 +1,8 @@
-@mixin primary-btn($bg-color, $color) {
+@mixin primary-btn() {
   width: 100%;
   text-align: center;
-  background-color: $bg-color;
-  color: $color;
+  background-color: var(--btn-primary-bg);
+  color: var(--text-primary);
   font-size: $font-sm-2;
   border-radius: 100px;
 }

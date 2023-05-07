@@ -1,15 +1,15 @@
 .status-label {
   font-size: $font-xs;
-  color: $white;
+  color: var(--text-primary);
   font-weight: $font-weight-bold;
 }
 
 .status-dropdown {
-  color: $white;
+  color: var(--text-primary);
   font-weight: $font-weight-light;
   width: 100%;
   position: relative;
-  border: 1px solid $dark-4;
+  border: 1px solid var(--line-color);
   border-radius: 4px;
   padding: 0.25rem;
   transition: border-color 0.3s ease;
@@ -31,12 +31,13 @@
 
   .status-dropdown__list {
     position: absolute;
-    background-color: $dark-2;
+    background-color: var(--status-dropdown-bg);
     width: 100%;
     left: 0;
     padding: $base-padding;
     margin-top: $base-margin * 1.25;
     border-radius: 4px;
+    box-shadow: $base-box-shadow;
   }
 
   .option-item {

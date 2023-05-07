@@ -1,7 +1,7 @@
 .delete-modal {
   width: 100%;
   max-width: 520px;
-  background-color: $dark-3;
+  background-color: var(--modal-bg);
   border-radius: $base-border-radius;
 
   p {
@@ -15,15 +15,31 @@
   }
 
   h5 {
-    color: $red-1;
+    color: var(--text-destructive);
     font-size: $font-header-lg;
   }
 
   .confirm-delete-btn {
-    @include primary-btn($red-1, $white);
+    width: 100%;
+    text-align: center;
+    background-color: var(--btn-destructive-bg);
+    color: var(--btn-destructive-color);
+    font-size: $font-sm-2;
+    border-radius: 100px;
+    transition: background-color 0.3s ease-in-out;
+
+    &:hover {
+      background-color: var(--btn-destructive-bg-hover);
+    }
   }
 
   .cancel-delete-btn {
-    @include primary-btn($white, $purple-dark);
+    width: 100%;
+    text-align: center;
+    background-color: var(--btn-cancel-bg);
+    color: var(--btn-cancel-color);
+    font-size: $font-sm-2;
+    border-radius: 100px;
+    transition: background-color 0.3s ease-in-out;
   }
 }

@@ -4,9 +4,9 @@
   display: flex;
   flex-wrap: nowrap;
   gap: 1rem;
-  padding: 1rem;
-  margin-top: 90px;
+  padding: 5.5rem 1rem 1rem 1rem;
   min-height: calc(100vh - 90px);
+  background-color: var(--taskboard-bg);
 }
 
 .translate-sidebar {
@@ -29,11 +29,11 @@
   justify-content: center;
 
   h3 {
-    color: $grey;
+    color: var(--text-secondary);
   }
 }
 
 .create-board-btn {
-  @include primary-btn($purple-dark, $white);
+  @include primary-btn();
   width: initial;
 }

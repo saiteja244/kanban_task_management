@@ -149,8 +149,6 @@ const TasksBoard = () => {
       <main
         className={`tasksboard__main ${
           appState.sideBarOpen ? "translate-sidebar" : ""
-        } ${
-          appState.sideBarOpen && testVal === "No Boards" ? "narrow-width" : ""
         }`}
       >
         {boardData.activeBoard.name !== "No Boards" ? (

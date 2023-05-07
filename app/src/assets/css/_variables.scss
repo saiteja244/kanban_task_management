@@ -1,11 +1,66 @@
 // Colors
-$purple-dark: #635fc7;
-$purple-light: #a8a4ff;
-$dark-1: #000112;
-$dark-2: #20212c;
-$dark-3: #2b2c37;
-$dark-4: #3e3f4e;
-$grey: #828fa3;
+.theme-dark {
+  --btn-primary-bg: rgba(99, 95, 199, 1);
+  --btn-primary-bg-hover: #8a84ff;
+  --btn-primary-color: rgba(255, 255, 255, 1);
+  --btn-secondary-bg: #fff;
+  --btn-secondary-color: rgba(99, 95, 199, 1);
+  --text-primary: #fff;
+  --text-secondary: #828fa3;
+  --text-destructive: #ea5555;
+  --text-destructive-hover: #ff9898;
+  --btn-destructive-bg: #ea5555;
+  --btn-destructive-bg-hover: #ff9898;
+  --btn-destructive-color: #fff;
+  --btn-cancel-bg: #fff;
+  --btn-cancel-bg-hover: #fff;
+  --btn-cancel-color: rgba(99, 95, 199, 1);
+  --taskcard-bg: #2b2c37;
+  --tooltip-bg: #2b2c37;
+  --modal-bg: #2b2c37;
+  --subtask-bg: #20212c;
+  --status-dropdown-bg: #20212c;
+  --sidebar-header-bg: #2b2c37;
+  --themeswitch-bg: #20212c;
+  --line-color: #3e3f4e;
+}
+
+.theme-light {
+  --btn-primary-bg: rgba(99, 95, 199, 1);
+  --btn-primary-bg-hover: #8a84ff;
+  --btn-primary-color: rgba(255, 255, 255, 1);
+  --btn-secondary-bg: #625fc74a;
+  --btn-secondary-color: rgba(99, 95, 199, 1);
+  --btn-destructive-bg: #ea5555;
+  --btn-destructive-bg-hover: #ff9898;
+  --btn-destructive-color: #fff;
+  --btn-cancel-bg: #625fc747;
+  --btn-cancel-bg-hover: rgba(168, 164, 255, 1);
+  --btn-cancel-color: rgba(99, 95, 199, 1);
+  --text-primary: #000112;
+  --text-primary-hover: #635fc7;
+  --text-secondary: #828fa3;
+  --text-destructive: #ea5555;
+  --text-destructive-hover: #ff9898;
+
+  --taskboard-bg: #f4f7fd;
+  --taskcard-bg: #fff;
+  --tooltip-bg: #fff;
+  --modal-bg: #fff;
+  --subtask-bg: #f4f7fd;
+  --status-dropdown-bg: #fff;
+  --sidebar-header-bg: #fff;
+  --themeswitch-bg: #f4f7fd;
+  --line-color: #e4ebfa;
+}
+
+$purple-dark: rgba(99, 95, 199, 1); // btn-primary
+$purple-light: #a8a4ff; // btn-primary-hover
+$logo-text: #000112; // text-color
+$dark-2: #20212c; // foreground-1
+$dark-3: #2b2c37; // foreground-2
+$dark-4: #3e3f4e; // foreground-3
+$grey: #828fa3; //
 $light-greyblue-1: #e4ebfa;
 $light-greyblue-2: #f4f7fd;
 $white: #ffffff;
@@ -47,3 +102,6 @@ $kerning-24: 2.4px;
 
 // Borders
 $base-border-radius: 4px;
+
+// Box Shadow
+$base-box-shadow: 4px 10px 10px rgba(0, 0, 0, 0.3);

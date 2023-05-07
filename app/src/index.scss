@@ -12,7 +12,6 @@
 
 html,
 body {
-  background-color: $dark-2;
   min-height: 100%;
 }
 
@@ -47,7 +46,7 @@ button {
 }
 
 .logo > g > path {
-  fill: $white;
+  fill: var(--text-primary);
 }
 
 ///////////// Utilities

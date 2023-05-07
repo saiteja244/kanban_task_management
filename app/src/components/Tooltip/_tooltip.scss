@@ -1,18 +1,19 @@
 .tooltip-container {
-  background-color: $dark-3;
+  background-color: var(--tooltip-bg);
   position: absolute;
   top: 65px;
-  right: -20px;
+  right: 10px;
   min-width: 10rem;
   border-radius: $base-border-radius;
   padding: $base-padding;
+  box-shadow: $base-box-shadow;
 
   button {
     display: block;
     width: 100%;
-    color: $grey;
+    color: var(--text-secondary);
     &:last-of-type {
-      color: $red-1;
+      color: var(--text-destructive);
     }
   }
 }

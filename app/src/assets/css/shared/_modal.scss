@@ -1,5 +1,5 @@
 .modal {
-  background-color: $dark-3;
+  background-color: var(--modal-bg);
   width: 100%;
   max-width: 550px;
   border-radius: $base-border-radius;
@@ -17,13 +17,13 @@
 
   .modal-header {
     h5 {
-      color: $white;
+      color: var(--text-primary);
       font-size: $font-header-lg;
     }
   }
 
   .modal-content {
-    color: $grey;
+    color: var(--text-secondary);
     margin: $base-margin 0;
 
     p {
@@ -42,14 +42,14 @@
     border: 1px solid #828fa346;
     border-radius: 4px;
     font-family: inherit;
-    color: $white;
+    color: var(--text-primary);
     font-size: $font-sm-2;
     position: relative;
   }
 
   label {
     font-size: $font-xs;
-    color: $white;
+    color: var(--text-primary);
     font-weight: $font-weight-bold;
   }
 
@@ -64,13 +64,23 @@
     outline: none;
   }
 
-  .modal-btn--fw {
+  .modal-btn--secondary {
     button {
-      @include primary-btn($white, $purple-dark);
+      width: 100%;
+      text-align: center;
+      background-color: var(--btn-secondary-bg);
+      color: var(--btn-secondary-color);
+      font-size: $font-sm-2;
+      border-radius: 100px;
     }
+  }
 
-    button.save-changes {
-      @include primary-btn($purple-dark, $white);
-    }
+  button.save-changes {
+    width: 100%;
+    text-align: center;
+    background-color: var(--btn-primary-bg);
+    color: $white;
+    font-size: $font-sm-2;
+    border-radius: 100px;
   }
 }

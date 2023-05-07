@@ -215,7 +215,7 @@ const EditBoard = () => {
                   </div>
                 );
               })}
-              <div className="modal-btn--fw mt-1">
+              <div className="modal-btn--secondary mt-1">
                 <button className="pt-1 pb-1" type="button" onClick={addColumn}>
                   &#43; Add New Column
                 </button>

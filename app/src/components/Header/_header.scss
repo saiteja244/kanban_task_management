@@ -1,5 +1,5 @@
 .header {
-  background-color: $dark-3;
+  background-color: var(--sidebar-header-bg);
   height: 80px;
   display: flex;
   position: fixed;
@@ -10,7 +10,7 @@
 
   .logo-container {
     width: 300px;
-    border-right: 1px solid $stroke-dark-grey;
+    border-right: 1px solid var(--line-color);
     height: 100%;
   }
 
@@ -21,7 +21,7 @@
     color: $white;
     font-weight: $font-weight-light;
     min-width: calc(100% - 300px);
-    border-bottom: 1px solid $stroke-dark-grey;
+    border-bottom: 1px solid var(--line-color);
 
     .header__content--btns {
       display: flex;
@@ -30,7 +30,17 @@
   }
 
   .add-task-btn {
-    @include primary-btn($purple-dark, $white);
+    width: 100%;
+    text-align: center;
+    background-color: var(--btn-primary-bg);
+    color: var(--btn-primary-color);
+    font-size: $font-sm-2;
+    border-radius: 100px;
     font-weight: $font-weight-reg;
+    transition: background-color 0.3s ease-in-out;
+
+    &:hover {
+      background-color: var(--btn-primary-bg-hover);
+    }
   }
 }
