@@ -13,11 +13,11 @@
   transform: translateX(300px);
 }
 
-.narrow-width {
-  // Change the width when sidebar is open
-  // Apply only when there are no boards available.
-  width: calc(100% - 300px);
-}
+// .narrow-width {
+//   // Change the width when sidebar is open
+//   // Apply only when there are no boards available.
+//   width: calc(100% - 300px);
+// }
 
 .no-boards-alert--container {
   transition: width 0.3s ease;
