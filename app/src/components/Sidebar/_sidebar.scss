@@ -2,6 +2,7 @@
   position: fixed;
   bottom: 0;
   left: 0;
+  top: 79px;
   width: 300px;
   background-color: var(--sidebar-header-bg);
   min-height: calc(100vh - 79px);
@@ -50,11 +51,11 @@
         }
       }
       &:hover:not(.active) {
-        background-color: var(--btn-primary-bg-hover);
-        color: $white;
+        background-color: var(--sidebar-btn-bg-hover);
+        color: var(--sidebar-btn-color-hover);
 
         & > button > svg > path {
-          fill: $white;
+          fill: var(--sidebar-btn-color-hover);
         }
       }
     }
@@ -84,5 +85,15 @@
     svg path {
       fill: $purple-dark;
     }
+  }
+}
+.sidebar-btn {
+  transition: background-color 0.3s ease-in-out;
+  width: 85%;
+  border-radius: 0 100px 100px 0;
+
+  &:hover {
+    background-color: var(--sidebar-btn-bg-hover);
+    color: var(--sidebar-btn-color-hover);
   }
 }

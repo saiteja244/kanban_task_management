@@ -5,6 +5,8 @@
   --btn-primary-color: rgba(255, 255, 255, 1);
   --btn-secondary-bg: #fff;
   --btn-secondary-color: rgba(99, 95, 199, 1);
+  --sidebar-btn-bg-hover: #fff;
+  --sidebar-btn-color-hover: #635fc7;
   --text-primary: #fff;
   --text-secondary: #828fa3;
   --text-destructive: #ea5555;
@@ -19,10 +21,15 @@
   --tooltip-bg: #2b2c37;
   --modal-bg: #2b2c37;
   --subtask-bg: #20212c;
+  --subtask-bg-hover: #625fc753;
+  --subtask-checkbox-bg: #2b2c37;
+  --subtask-checkbox-border: #828fa349;
+  --subtask-text-hover: #fff;
   --status-dropdown-bg: #20212c;
   --sidebar-header-bg: #2b2c37;
   --themeswitch-bg: #20212c;
   --line-color: #3e3f4e;
+  --label-color: #fff;
 }
 
 .theme-light {
@@ -34,11 +41,13 @@
   --btn-destructive-bg: #ea5555;
   --btn-destructive-bg-hover: #ff9898;
   --btn-destructive-color: #fff;
+  --sidebar-btn-bg-hover: #625fc74a;
+  --sidebar-btn-color-hover: #635fc7;
   --btn-cancel-bg: #625fc747;
   --btn-cancel-bg-hover: rgba(168, 164, 255, 1);
   --btn-cancel-color: rgba(99, 95, 199, 1);
   --text-primary: #000112;
-  --text-primary-hover: #635fc7;
+  --text-primary-hover: #625fc760;
   --text-secondary: #828fa3;
   --text-destructive: #ea5555;
   --text-destructive-hover: #ff9898;
@@ -48,13 +57,18 @@
   --tooltip-bg: #fff;
   --modal-bg: #fff;
   --subtask-bg: #f4f7fd;
+  --subtask-bg-hover: #625fc760;
+  --subtask-checkbox-bg: #fff;
+  --subtask-checkbox-border: #828fa349;
+  --subtask-text-hover: #000112;
   --status-dropdown-bg: #fff;
   --sidebar-header-bg: #fff;
   --themeswitch-bg: #f4f7fd;
   --line-color: #e4ebfa;
+  --label-color: #828fa3;
 }
 
-$purple-dark: rgba(99, 95, 199, 1); // btn-primary
+$purple-dark: #635fc7; // btn-primary
 $purple-light: #a8a4ff; // btn-primary-hover
 $logo-text: #000112; // text-color
 $dark-2: #20212c; // foreground-1

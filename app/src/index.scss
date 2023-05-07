@@ -36,10 +36,6 @@ button {
   padding: 0;
 }
 
-.theme--dark {
-  width: 100vw;
-}
-
 .center-vertical {
   display: flex;
   align-items: center;
@@ -47,6 +43,10 @@ button {
 
 .logo > g > path {
   fill: var(--text-primary);
+}
+
+label {
+  color: var(--label-color);
 }
 
 ///////////// Utilities
@@ -69,6 +69,7 @@ button {
 @import "./components/Status/status";
 @import "./components/Tooltip/tooltip";
 @import "./components/ConfirmDeleteModal/confirmdelete";
+@import "./components/ThemeSwitch/themeswitch";
 
 // Shared Modules
 @import "./assets/css/shared/modal";

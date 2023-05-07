@@ -1,6 +1,12 @@
 .checkbox-container {
   background-color: var(--subtask-bg);
   border-radius: $base-border-radius;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: var(--subtask-bg-hover);
+    color: var(--subtask-text-hover);
+  }
 }
 
 .checkbox-icon {
@@ -8,17 +14,6 @@
   pointer-events: none;
   user-select: none;
 }
-
-// .checkbox-container {
-//   box-sizing: border-box;
-//   background: $white;
-//   color: #222;
-//   height: 64px;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   flex-flow: row wrap;
-// }
 
 .checkbox-container * {
   box-sizing: border-box;
@@ -43,10 +38,6 @@
   margin-right: 6px;
 }
 
-.checkbox:hover {
-  background: rgba(0, 119, 255, 0.06);
-}
-
 .checkbox span {
   vertical-align: middle;
   transform: translate3d(0, 0, 0);
@@ -59,11 +50,12 @@
   height: 18px;
   border-radius: 4px;
   transform: scale(1);
-  border: 1px solid #cccfdb;
+  border: 1px solid var(--subtask-checkbox-border);
   transition: all 0.3s ease;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: var(--subtask-checkbox-bg);
 }
 
 .checkbox span:first-child svg {
@@ -81,13 +73,14 @@
   font-size: $font-xs;
 }
 
-.checkbox:hover span:first-child {
-  border-color: $purple-dark;
-}
-
-.checkbox span:last-child.completed-linethrough {
+.checkbox-container span:last-child.completed-linethrough {
   color: $grey;
   text-decoration: line-through;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--subtask-text-hover);
+  }
 }
 
 .checkbox-input:checked + .checkbox span:first-child {
