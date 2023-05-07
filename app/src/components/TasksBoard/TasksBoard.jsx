@@ -55,14 +55,18 @@ const TasksBoard = () => {
 
     if (activeContainerId === overContainerId) return;
 
-    const columnToRemoveTaskFrom = findNestedObject(
-      boardData,
-      activeContainerId
-    );
-    const columnToInjectTaskInto = findNestedObject(boardData, overContainerId);
-
     setBoardData((prevBoardData) => {
       const taskToChange = findNestedObject(prevBoardData, active.id);
+
+      const columnToRemoveTaskFrom = findNestedObject(
+        prevBoardData,
+        activeContainerId
+      );
+      const columnToInjectTaskInto = findNestedObject(
+        prevBoardData,
+        over.data.current.id || overContainerId
+      );
+      console.log(columnToInjectTaskInto);
 
       let finalBoard = modifyNestedObject(
         prevBoardData,
@@ -75,14 +79,19 @@ const TasksBoard = () => {
         }
       );
 
-      finalBoard = modifyNestedObject(finalBoard, overContainerId, undefined, {
-        tasks: [
-          ...columnToInjectTaskInto.tasks,
-          modifyObject(taskToChange, undefined, {
-            status: over?.data?.current?.status,
-          }),
-        ],
-      });
+      finalBoard = modifyNestedObject(
+        finalBoard,
+        overContainerId || over.data.current.id,
+        undefined,
+        {
+          tasks: [
+            ...columnToInjectTaskInto.tasks,
+            modifyObject(taskToChange, undefined, {
+              status: over?.data?.current?.status,
+            }),
+          ],
+        }
+      );
 
       return finalBoard;
     });
