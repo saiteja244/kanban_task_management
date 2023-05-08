@@ -6,11 +6,11 @@ import { BoardContextProvider } from "./context/BoardContext";
 import { ModalContextProvider } from "./context/ModalContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <ModalContextProvider>
-    <AppStateProvider>
+  <AppStateProvider>
+    <ModalContextProvider>
       <BoardContextProvider>
         <App />
       </BoardContextProvider>
-    </AppStateProvider>
-  </ModalContextProvider>
+    </ModalContextProvider>
+  </AppStateProvider>
 );

@@ -1,5 +1,7 @@
 .column {
-  width: 280px;
+  flex-basis: 280px;
+  flex-grow: 0;
+  flex-shrink: 0;
   h3 {
     color: $grey;
     font-weight: $font-weight-reg;

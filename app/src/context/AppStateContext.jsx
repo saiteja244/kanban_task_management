@@ -7,6 +7,7 @@ export const AppStateProvider = ({ children }) => {
     sideBarOpen: true,
     theme: "dark",
     isMobileDevice: null,
+    showMobileNav: false,
   });
 
   return (

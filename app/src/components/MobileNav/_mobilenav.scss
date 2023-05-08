@@ -1,0 +1,16 @@
+.nav-mob--container {
+  position: absolute;
+  border-radius: $base-border-radius;
+  top: 90px;
+  left: 50%;
+  width: 90%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  background-color: var(--sidebar-header-bg);
+  color: $grey;
+  box-shadow: $base-box-shadow;
+}
+
+.nav-mob-items {
+  position: relative;
+}

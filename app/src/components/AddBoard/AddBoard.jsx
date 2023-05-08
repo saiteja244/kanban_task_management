@@ -29,10 +29,6 @@ const AddBoard = () => {
     ],
   });
 
-  useEffect(() => {
-    console.log(boardData);
-  }, [boardData]);
-
   const [isNameValid, setIsNameValid] = useState(true);
 
   const addColumn = () => {

@@ -1,6 +1,5 @@
 .task-card {
-  width: 280px;
-
+  width: calc(100% - 1rem);
   @include tablet() {
     width: 100%;
   }

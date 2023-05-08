@@ -3,6 +3,17 @@
   justify-content: center;
   align-items: center;
   background-color: var(--themeswitch-bg);
+  position: absolute;
+  bottom: 0;
+  margin: 0.5rem 0 0.5rem 0;
+  left: 10%;
+  right: 10%;
+  border-radius: $base-border-radius;
+
+  @include tablet() {
+    position: static;
+    margin: 0;
+  }
 }
 
 .theme-switcher {

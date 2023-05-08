@@ -5,8 +5,8 @@ import ShowSidebarButton from "./components/ShowSidebarButton/ShowSidebarButton"
 import ModalOverlay from "./components/ModalOverlay/ModalOverlay";
 import { UseAppStateContext } from "./context/AppStateContext";
 import { UseModalContext } from "./context/ModalContext";
-import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { AnimatePresence } from "framer-motion";
+import { useEffect } from "react";
 
 import "./index.scss";
 

@@ -9,16 +9,24 @@ import { UseAppStateContext } from "../../context/AppStateContext";
 import { UseModalContext } from "../../context/ModalContext";
 import { UseBoardContext } from "../../context/BoardContext";
 import Tooltip from "../Tooltip/Tooltip";
+import MobileNav from "../MobileNav/MobileNav";
 import { nanoid } from "nanoid";
 
 const Header = () => {
-  const [appState] = UseAppStateContext();
+  const [appState, setAppState] = UseAppStateContext();
   const [_, setModalData] = UseModalContext();
   const { boardData } = UseBoardContext();
-
+  const [showMobileNav, setShowMobileNav] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
 
   const handleNewTaskModal = () => {
+    if (appState.showMobileNav) {
+      setAppState((prevAppState) => ({
+        ...prevAppState,
+        showMobileNav: false,
+      }));
+    }
+
     setModalData({
       isModalDisplayed: true,
       modalToRender: "new-task",
@@ -40,6 +48,13 @@ const Header = () => {
     });
 
     setShowTooltip(false);
+
+    if (appState.showMobileNav) {
+      setAppState((prevAppState) => ({
+        ...prevAppState,
+        showMobileNav: false,
+      }));
+    }
   };
 
   const handleDelete = () => {
@@ -51,6 +66,13 @@ const Header = () => {
         itemTitle: boardData.activeBoard.name,
       },
     });
+
+    if (appState.showMobileNav) {
+      setAppState((prevAppState) => ({
+        ...prevAppState,
+        showMobileNav: false,
+      }));
+    }
 
     setShowTooltip(false);
   };
@@ -73,14 +95,25 @@ const Header = () => {
       <div className="header__content pl-5 pr-5">
         <div className="heading">
           {appState.isMobileDevice ? (
-            <h2>
-              <button>
-                {boardData.activeBoard.name}
-                <span className="ml-1">
-                  <IconChevronDown />
-                </span>
-              </button>
-            </h2>
+            <>
+              <h2>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setAppState((prevAppState) => ({
+                      ...prevAppState,
+                      showMobileNav: !prevAppState.showMobileNav,
+                    }));
+                  }}
+                >
+                  {boardData.activeBoard.name}
+                  <span className="ml-1">
+                    <IconChevronDown />
+                  </span>
+                </button>
+              </h2>
+              {appState.showMobileNav ? <MobileNav /> : ""}
+            </>
           ) : (
             <h2>{boardData.activeBoard.name}</h2>
           )}

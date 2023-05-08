@@ -1,0 +1,84 @@
+.sidebar__items {
+  h2 {
+    font-size: $font-header-sm;
+    font-weight: $font-weight-reg;
+    letter-spacing: 2.4px;
+    text-transform: uppercase;
+  }
+
+  ul {
+    font-size: $font-sm;
+
+    button {
+      border-radius: 20px;
+      padding: 5px 15px;
+    }
+
+    li {
+      transition: background-color 0.3s ease-in-out;
+      width: 93%;
+      border-radius: 0 100px 100px 0;
+      &.active {
+        color: $white;
+        fill: $white;
+        background-color: var(--btn-primary-bg);
+
+        transition: all 0.3s ease-in-out;
+
+        & > button > svg > path {
+          fill: $white;
+        }
+      }
+      &:hover:not(.active) {
+        background-color: var(--sidebar-btn-bg-hover);
+        color: var(--sidebar-btn-color-hover);
+
+        & > button > svg > path {
+          fill: var(--sidebar-btn-color-hover);
+        }
+      }
+    }
+  }
+
+  .logo.logo-dark > g > path {
+    fill: $white;
+  }
+
+  .add-board {
+    color: $purple-light;
+
+    & > button > svg > path {
+      fill: $purple-light;
+    }
+  }
+
+  .sidebar__items {
+    button:not(ul button) {
+      font-size: $font-sm;
+    }
+
+    .create-board {
+      color: $purple-dark;
+
+      svg path {
+        fill: $purple-dark;
+      }
+    }
+  }
+  .sidebar-btn {
+    transition: background-color 0.3s ease-in-out;
+    width: 85%;
+    border-radius: 0 100px 100px 0;
+    position: absolute;
+    bottom: 0;
+
+    &:hover {
+      background-color: var(--sidebar-btn-bg-hover);
+      color: var(--sidebar-btn-color-hover);
+    }
+
+    @include tablet() {
+      position: static;
+    }
+  }
+}
