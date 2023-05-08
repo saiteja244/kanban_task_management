@@ -7,7 +7,6 @@
 .subtask-column-label,
 input {
   position: relative;
-  width: 100%;
 }
 
 .subtask-column-label {
@@ -17,9 +16,6 @@ input {
 
 .title-label {
   position: relative;
-  input {
-    width: 100%;
-  }
 }
 
 .subtask-column-label.error::after,

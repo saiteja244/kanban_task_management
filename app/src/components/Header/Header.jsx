@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { ReactComponent as Logo } from "../../assets/svgs/logo-dark.svg";
+import { ReactComponent as MobileLogo } from "../../assets/svgs/logo-mobile.svg";
 import { ReactComponent as EllipsisIcon } from "../../assets/svgs/icon-vertical-ellipsis.svg";
+import { ReactComponent as PlusIcon } from "../../assets/svgs/icon-plus.svg";
+import { ReactComponent as IconChevronDown } from "../../assets/svgs/icon-chevron-down.svg";
+import { ReactComponent as IconChevronUp } from "../../assets/svgs/icon-chevron-up.svg";
 import { UseAppStateContext } from "../../context/AppStateContext";
 import { UseModalContext } from "../../context/ModalContext";
 import { UseBoardContext } from "../../context/BoardContext";
@@ -59,18 +63,39 @@ const Header = () => {
         }`}
       >
         <h1>
-          <Logo className="logo" />
+          {appState.isMobileDevice ? (
+            <MobileLogo className="logo" />
+          ) : (
+            <Logo className="logo" />
+          )}
         </h1>
       </div>
-      <div className="header__content pl-8 pr-8">
-        <h2>{boardData.activeBoard.name}</h2>
+      <div className="header__content pl-5 pr-5">
+        <div className="heading">
+          {appState.isMobileDevice ? (
+            <h2>
+              <button>
+                {boardData.activeBoard.name}
+                <span className="ml-1">
+                  <IconChevronDown />
+                </span>
+              </button>
+            </h2>
+          ) : (
+            <h2>{boardData.activeBoard.name}</h2>
+          )}
+        </div>
         <div className="header__content--btns">
           <button
-            className="add-task-btn pr-3 pl-3 pb-2 pt-2 mr-2"
+            className="add-task-btn"
             type="button"
             onClick={handleNewTaskModal}
+            aria-label={appState.isMobileDevice ? "Add New Task" : null}
           >
-            &#43; Add New Task
+            <span>
+              <PlusIcon />
+            </span>
+            {!appState.isMobileDevice ? "Add New Task" : ""}
           </button>
           <button
             type="button"

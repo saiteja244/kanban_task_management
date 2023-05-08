@@ -11,7 +11,7 @@ import { useState, useEffect } from "react";
 import "./index.scss";
 
 function App() {
-  const [appState] = UseAppStateContext();
+  const [appState, setAppState] = UseAppStateContext();
   const [modalData] = UseModalContext();
 
   useEffect(() => {
@@ -22,10 +22,20 @@ function App() {
     }
   }, [appState.theme]);
 
+  useEffect(() => {
+    if (window.matchMedia("(max-width: 768px)").matches) {
+      setAppState({
+        ...appState,
+        isMobileDevice: true,
+      });
+    }
+  }, []);
+
   return (
     <div className={appState.theme === "dark" ? "theme-dark" : "theme-light"}>
       <Header />
-      <Sidebar />
+      {!appState.isMobileDevice ? <Sidebar /> : ""}
+
       <TasksBoard />
       {!appState.sideBarOpen ? <ShowSidebarButton /> : ""}
       {modalData.isModalDisplayed ? (

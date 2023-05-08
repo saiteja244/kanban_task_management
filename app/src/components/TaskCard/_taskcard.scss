@@ -1,5 +1,10 @@
 .task-card {
-  width: 100%;
+  width: 280px;
+
+  @include tablet() {
+    width: 100%;
+  }
+
   background-color: var(--taskcard-bg);
   cursor: pointer;
 

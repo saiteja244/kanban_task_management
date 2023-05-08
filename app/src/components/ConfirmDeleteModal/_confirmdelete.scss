@@ -1,8 +1,12 @@
 .delete-modal {
   width: 100%;
-  max-width: 520px;
+  max-width: 375px;
   background-color: var(--modal-bg);
   border-radius: $base-border-radius;
+
+  @include tablet() {
+    max-width: 520px;
+  }
 
   p {
     color: $grey;

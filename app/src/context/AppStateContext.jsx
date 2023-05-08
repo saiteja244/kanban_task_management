@@ -6,6 +6,7 @@ export const AppStateProvider = ({ children }) => {
   const [appState, setAppState] = useState({
     sideBarOpen: true,
     theme: "dark",
+    isMobileDevice: null,
   });
 
   return (

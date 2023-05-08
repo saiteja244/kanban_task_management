@@ -10,15 +10,6 @@
   line-height: 1.5;
 }
 
-html,
-body {
-  min-height: 100%;
-}
-
-body {
-  width: 100vw;
-}
-
 ul {
   list-style-type: none;
 }
@@ -54,6 +45,7 @@ label {
 
 //////////// Mixins
 @import "./assets/css/shared/button";
+@import "./assets/css/mixins";
 
 ///////////// Components
 @import "./components/ShowSidebarButton/showsidebarbutton";

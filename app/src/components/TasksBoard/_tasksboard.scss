@@ -5,12 +5,14 @@
   flex-wrap: nowrap;
   gap: 1rem;
   padding: 5.5rem 1rem 1rem 1rem;
-  min-height: calc(100vh - 90px);
+  // min-height: calc(100vh - 90px);
   background-color: var(--taskboard-bg);
 }
 
-.translate-sidebar {
-  transform: translateX(300px);
+@include tablet() {
+  .translate-sidebar {
+    transform: translateX(300px);
+  }
 }
 
 // .narrow-width {

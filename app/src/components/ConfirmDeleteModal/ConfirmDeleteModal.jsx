@@ -45,10 +45,6 @@ const ConfirmDeleteModal = () => {
     });
   };
 
-  useEffect(() => {
-    console.log(boardData);
-  }, [boardData]);
-
   return (
     <AnimatePresence>
       <motion.aside
