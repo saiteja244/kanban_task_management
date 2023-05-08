@@ -24,17 +24,6 @@ export const BoardContextProvider = ({ children }) => {
     changeBoard,
   };
 
-  // const memoedValues = useMemo(
-  //   () => ({
-  //     boardData,
-  //     setBoardData,
-  //     activeBoard,
-  //     setActiveBoard,
-  //     changeBoard,
-  //   }),
-  //   [activeBoard, boardData, setBoardData]
-  // );
-
   return (
     <BoardContext.Provider value={values}>{children}</BoardContext.Provider>
   );
