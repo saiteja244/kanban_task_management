@@ -12,6 +12,7 @@
     button {
       border-radius: 20px;
       padding: 5px 15px;
+      font-weight: $font-weight-reg;
     }
 
     li {
@@ -60,6 +61,11 @@
     .create-board {
       color: $purple-dark;
 
+      &:hover {
+        background-color: var(--sidebar-btn-bg-hover);
+        color: var(--sidebar-btn-color-hover);
+      }
+
       svg path {
         fill: $purple-dark;
       }
@@ -69,16 +75,10 @@
     transition: background-color 0.3s ease-in-out;
     width: 85%;
     border-radius: 0 100px 100px 0;
-    position: absolute;
-    bottom: 0;
 
     &:hover {
       background-color: var(--sidebar-btn-bg-hover);
       color: var(--sidebar-btn-color-hover);
-    }
-
-    @include tablet() {
-      position: static;
     }
   }
 }

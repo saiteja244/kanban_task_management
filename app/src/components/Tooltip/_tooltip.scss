@@ -10,6 +10,7 @@
 
   button {
     display: block;
+    font-weight: $font-weight-reg;
     width: 100%;
     color: var(--text-secondary);
     &:last-of-type {

@@ -82,7 +82,7 @@ const Nav = () => {
               );
             })}
             <button
-              className="center-vertical create-board"
+              className="center-vertical pt-1 pb-1 create-board sidebar-btn"
               type="button"
               onClick={handleCreateBoard}
             >

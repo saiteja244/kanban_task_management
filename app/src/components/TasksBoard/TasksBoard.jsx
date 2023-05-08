@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Column from "../Column/Column";
 import { UseAppStateContext } from "../../context/AppStateContext";
 import { UseModalContext } from "../../context/ModalContext";
@@ -25,6 +25,7 @@ const TasksBoard = () => {
   const [appState] = UseAppStateContext();
   const { boardData, setBoardData } = UseBoardContext();
   const [_, setModalData] = UseModalContext();
+  const [sideBarOpen, setSidebarOpen] = useState();
 
   const columnColors = [
     "#49C4E5",
@@ -38,6 +39,14 @@ const TasksBoard = () => {
   const [draggedTask, setDraggedTask] = useState({
     isDragActive: false,
   });
+
+  useEffect(() => {
+    if (appState.sideBarOpen) {
+      setSidebarOpen(true);
+    } else {
+      setSidebarOpen(false);
+    }
+  }, [appState.sideBarOpen]);
 
   const handleDragStart = (e) => {
     const taskToDrag = findNestedObject(boardData, e.active.id);
@@ -156,11 +165,17 @@ const TasksBoard = () => {
       <main
         className={`tasksboard__main ${
           appState.sideBarOpen ? "translate-sidebar" : ""
+        } ${
+          sideBarOpen &&
+          (boardData?.activeBoard?.columns?.length === 0 ||
+            boardData?.activeBoard?.name === "No Boards")
+            ? "sidebar-width"
+            : ""
         }`}
       >
         {boardData.activeBoard.name !== "No Boards" ? (
           <>
-            {boardData.activeBoard.columns ? (
+            {boardData.activeBoard.columns.length > 0 ? (
               <>
                 {boardData.activeBoard.columns.map((column, i) => {
                   const { id, name, tasks } = column;
@@ -175,32 +190,54 @@ const TasksBoard = () => {
                     />
                   );
                 })}
-                <button
-                  className="add-column-btn"
-                  onClick={() => {
-                    setModalData({
-                      isModalDisplayed: true,
-                      modalToRender: "edit-board",
-                      modalContent: {
-                        id: boardData.activeBoard.id,
-                        name: boardData.activeBoard.name,
-                        columns: boardData.activeBoard.columns,
-                      },
-                    });
-                  }}
-                >
-                  &#43; New Column
-                </button>
+                <div className="big-button">
+                  <button
+                    className="add-column-btn"
+                    onClick={() => {
+                      setModalData({
+                        isModalDisplayed: true,
+                        modalToRender: "edit-board",
+                        modalContent: {
+                          id: boardData.activeBoard.id,
+                          name: boardData.activeBoard.name,
+                          columns: boardData.activeBoard.columns,
+                        },
+                      });
+                    }}
+                  >
+                    &#43; New Column
+                  </button>
+                </div>
               </>
             ) : (
-              ""
+              <>
+                <div className="alert-container">
+                  <h3>The board is empty. Create a column to get started.</h3>
+                  <button
+                    className="alert-board-btn pl-5 pr-5 pt-2 pb-2 mt-2"
+                    onClick={() =>
+                      setModalData({
+                        isModalDisplayed: true,
+                        modalToRender: "edit-board",
+                        modalContent: {
+                          id: boardData.activeBoard.id,
+                          name: boardData.activeBoard.name,
+                          columns: boardData.activeBoard.columns,
+                        },
+                      })
+                    }
+                  >
+                    &#43; Add New Column
+                  </button>
+                </div>
+              </>
             )}
           </>
         ) : (
-          <div className="no-boards-alert--container">
+          <div className="alert-container">
             <h3>You have no boards. Create a board to get started.</h3>
             <button
-              className="create-board-btn pl-5 pr-5 pt-2 pb-2 mt-2"
+              className="alert-board-btn pl-5 pr-5 pt-2 pb-2 mt-2"
               onClick={() =>
                 setModalData({
                   modalToRender: "create-board",
