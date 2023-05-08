@@ -26,11 +26,18 @@ const TasksBoard = () => {
   const { boardData, setBoardData } = UseBoardContext();
   const [_, setModalData] = UseModalContext();
 
+  const columnColors = [
+    "#49C4E5",
+    "#8471F2",
+    " #67E2AE",
+    "#E2679B",
+    "#DFF271",
+    "#E56A49",
+  ];
+
   const [draggedTask, setDraggedTask] = useState({
     isDragActive: false,
   });
-
-  const testVal = "No Boards";
 
   const handleDragStart = (e) => {
     const taskToDrag = findNestedObject(boardData, e.active.id);
@@ -153,10 +160,41 @@ const TasksBoard = () => {
       >
         {boardData.activeBoard.name !== "No Boards" ? (
           <>
-            {boardData.activeBoard.columns.map((column) => {
-              const { id, name, tasks } = column;
-              return <Column key={id} id={id} name={name} tasks={tasks} />;
-            })}
+            {boardData.activeBoard.columns ? (
+              <>
+                {boardData.activeBoard.columns.map((column, i) => {
+                  const { id, name, tasks } = column;
+                  const columnColor = columnColors[i % columnColors.length];
+                  return (
+                    <Column
+                      key={id}
+                      id={id}
+                      name={name}
+                      tasks={tasks}
+                      columnColor={columnColor}
+                    />
+                  );
+                })}
+                <button
+                  className="add-column-btn"
+                  onClick={() => {
+                    setModalData({
+                      isModalDisplayed: true,
+                      modalToRender: "edit-board",
+                      modalContent: {
+                        id: boardData.activeBoard.id,
+                        name: boardData.activeBoard.name,
+                        columns: boardData.activeBoard.columns,
+                      },
+                    });
+                  }}
+                >
+                  &#43; New Column
+                </button>
+              </>
+            ) : (
+              ""
+            )}
           </>
         ) : (
           <div className="no-boards-alert--container">

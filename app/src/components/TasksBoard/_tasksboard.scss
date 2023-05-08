@@ -15,12 +15,6 @@
   }
 }
 
-// .narrow-width {
-//   // Change the width when sidebar is open
-//   // Apply only when there are no boards available.
-//   width: calc(100% - 300px);
-// }
-
 .no-boards-alert--container {
   transition: width 0.3s ease;
   min-height: 100%;
@@ -38,4 +32,19 @@
 .create-board-btn {
   @include primary-btn();
   width: initial;
+}
+
+.add-column-btn {
+  background: var(--new-column-btn-bg);
+  color: $grey;
+  flex: 0 0 280px;
+  margin-top: 2.2rem;
+  margin-right: 1rem;
+  text-align: center;
+  border-radius: $base-border-radius;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--newtask-btn-color-hover);
+  }
 }

@@ -6,7 +6,7 @@ import {
 } from "@dnd-kit/sortable";
 import { useDroppable } from "@dnd-kit/core";
 
-const Column = ({ id, name, tasks }) => {
+const Column = ({ id, name, tasks, columnColor }) => {
   const { setNodeRef } = useDroppable({
     id,
     data: {
@@ -22,7 +22,13 @@ const Column = ({ id, name, tasks }) => {
     >
       <section className="column" ref={setNodeRef}>
         <div>
-          <h3>{name}</h3>
+          <h3>
+            <span
+              className="column-color-circle"
+              style={{ backgroundColor: columnColor }}
+            ></span>
+            {name}
+          </h3>
         </div>
         <div>
           <ul>

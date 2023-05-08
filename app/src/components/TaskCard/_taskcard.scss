@@ -1,5 +1,6 @@
 .task-card {
   width: calc(100% - 1rem);
+  border-radius: $base-border-radius;
   @include tablet() {
     width: 100%;
   }
