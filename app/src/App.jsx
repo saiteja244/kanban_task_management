@@ -25,7 +25,7 @@ function App() {
   }, [appState.theme]);
 
   useEffect(() => {
-    if (windowWidth <= 768) {
+    if (windowWidth <= 760) {
       setAppState({
         ...appState,
         isMobileDevice: true,
