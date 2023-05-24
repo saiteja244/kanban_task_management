@@ -1,12 +1,16 @@
-import { useState, createContext, useContext, useMemo } from "react";
+import { useState, createContext, useContext, useEffect } from "react";
 import boards from "../data";
 
 const BoardContext = createContext();
 
 export const BoardContextProvider = ({ children }) => {
-  const [boardData, setBoardData] = useState({
-    boardCollection: boards,
-    activeBoard: boards[0],
+  const [boardData, setBoardData] = useState(() => {
+    return (
+      JSON.parse(localStorage.getItem("boards")) || {
+        boardCollection: boards,
+        activeBoard: boards[0],
+      }
+    );
   });
 
   const changeBoard = (id) => {
@@ -17,6 +21,10 @@ export const BoardContextProvider = ({ children }) => {
       };
     });
   };
+
+  useEffect(() => {
+    localStorage.setItem("boards", JSON.stringify(boardData));
+  }, [boardData]);
 
   const values = {
     boardData,
