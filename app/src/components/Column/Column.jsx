@@ -31,23 +31,27 @@ const Column = ({ id, name, tasks, columnColor }) => {
           </h3>
         </div>
         <div>
-          <ul>
-            {tasks.map((task, index) => {
-              const { id, title, description, subtasks, status } = task;
-              return (
-                <TaskCard
-                  key={id}
-                  columnName={name}
-                  title={title}
-                  description={description}
-                  subtasks={subtasks}
-                  status={status}
-                  id={id}
-                  index={index}
-                />
-              );
-            })}
-          </ul>
+          {tasks ? (
+            <ul>
+              {tasks.map((task, index) => {
+                const { id, title, description, subtasks, status } = task;
+                return (
+                  <TaskCard
+                    key={id}
+                    columnName={name}
+                    title={title}
+                    description={description}
+                    subtasks={subtasks}
+                    status={status}
+                    id={id}
+                    index={index}
+                  />
+                );
+              })}
+            </ul>
+          ) : (
+            ""
+          )}
         </div>
       </section>
     </SortableContext>

@@ -85,6 +85,7 @@ const Header = () => {
         }`}
       >
         <h1>
+          <span className="sr-only">Kanban</span>
           {appState.isMobileDevice ? (
             <MobileLogo className="logo" />
           ) : (

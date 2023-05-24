@@ -183,7 +183,8 @@ const TaskDetail = () => {
           className="tooltip-btn"
           onClick={() => setShowTooltip(!showTooltip)}
         >
-          <span>
+          <span className="sr-only">Edit Task</span>
+          <span aria-hidden="true">
             <EllipsisIcon />
           </span>
         </button>
