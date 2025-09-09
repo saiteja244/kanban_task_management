@@ -68,14 +68,7 @@ I must admit, my light/dark mode solution doesn't seem too pretty or maintainabl
 
 I am also currently building a backend for this application using Flask and MongoDB in a Docker container, adopting a TDD approach to ensure that data mutations are accurate and produce expected results. The backend is nearly finished; I have created an authentication flow using JWT. I am now tackling restructuring how the board state is handled, since I of course will no longer be using the provided data.js file. Right now this feels like quite a significant undertaking! I wanted to wait until I completed the project as a full stack application before I submitted to Frontend Mentor, but I will keep you posted on the progress of the full stack version if you're interested!
 
-### Useful resources
 
-- [NetNinja](https://www.youtube.com/@NetNinja) - NetNinja helped me get a better idea of how to use SASS effectively, to create utility classes and add mixins.
-
-## Author
-
-- Website - [Oliver Cadman](https://www.linkedin.com/in/oliver-cadman/)
-- Frontend Mentor - [@OliverCadman](https://www.frontendmentor.io/profile/OliverCadman)
 
 ## Acknowledgments
 
