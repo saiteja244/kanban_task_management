@@ -68,8 +68,3 @@ I must admit, my light/dark mode solution doesn't seem too pretty or maintainabl
 
 I am also currently building a backend for this application using Flask and MongoDB in a Docker container, adopting a TDD approach to ensure that data mutations are accurate and produce expected results. The backend is nearly finished; I have created an authentication flow using JWT. I am now tackling restructuring how the board state is handled, since I of course will no longer be using the provided data.js file. Right now this feels like quite a significant undertaking! I wanted to wait until I completed the project as a full stack application before I submitted to Frontend Mentor, but I will keep you posted on the progress of the full stack version if you're interested!
 
-
-
-## Acknowledgments
-
-Many thanks to [john-coderpro](https://github.com/john-coderpro), who unknowingly helped me navigate some tricky parts of the project in it's inception!
